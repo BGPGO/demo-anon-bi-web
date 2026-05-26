@@ -1,0 +1,200 @@
+[
+  {
+    "id": "queima_abc_15",
+    "titulo": "Queima top 50 encalhe ABC com 15% off",
+    "descricao": "Desconto 15% nos SKUs classe A e B com encalhe >=90d. Promocao via e-mail marketing ou destaque no site.",
+    "skus": 7,
+    "premissa_taxa_venda": "Classe A: 75% escoam em 90d. Classe B: 55% escoam em 90d.",
+    "prazo_dias": 29,
+    "valor_em_estoque": 21187.874371151785,
+    "recuperacao_bruta_R$": 13000.851799687065,
+    "recuperacao_liquida_R$": 9723.379089622858,
+    "margem_sacrificada_R$": 1660.9446715901565,
+    "cdi_economizado_R$": 460.6135415664424,
+    "liquido_caixa_R$": 8971.966684329063,
+    "ROI": 4.91047649934784,
+    "amostra_skus": [
+      {
+        "codigo": "COD04031",
+        "nome": "Produto 5130",
+        "valor_estoque_venda": 4124.612887281176
+      },
+      {
+        "codigo": "COD01970",
+        "nome": "Produto 2914",
+        "valor_estoque_venda": 3372.774063972416
+      },
+      {
+        "codigo": "COD04054",
+        "nome": "Produto 5156",
+        "valor_estoque_venda": 2005.119227119051
+      },
+      {
+        "codigo": "COD05693",
+        "nome": "Produto 6869",
+        "valor_estoque_venda": 1671.2142604749972
+      },
+      {
+        "codigo": "COD00001",
+        "nome": "Produto 933",
+        "valor_estoque_venda": 1466.759903668614
+      }
+    ]
+  },
+  {
+    "id": "liquidacao_mortos_25",
+    "titulo": "Liquidacao 25% off em SKUs Mortos",
+    "descricao": "Desconto agressivo nos SKUs sem venda ha 365+ dias. Recupera caixa e libera prateleira fisica.",
+    "skus": 39,
+    "premissa_taxa_venda": "35% dos SKUs escoam em 120d com desconto 25%.",
+    "prazo_dias": 38,
+    "valor_em_estoque": 220620.47968787985,
+    "recuperacao_bruta_R$": 76314.33805274029,
+    "recuperacao_liquida_R$": 58398.84113598604,
+    "margem_sacrificada_R$": 22229.891544518447,
+    "cdi_economizado_R$": 821.1284999059568,
+    "liquido_caixa_R$": 43994.44672239932,
+    "ROI": 2.0363272028332795,
+    "amostra_skus": [
+      {
+        "codigo": "",
+        "nome": "Produto 2195",
+        "valor_estoque_venda": 98281.11457651446,
+        "dias_sem_venda": 33200
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2484",
+        "valor_estoque_venda": 53383.66608158462,
+        "dias_sem_venda": 34393
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2048",
+        "valor_estoque_venda": 26624.61421768568,
+        "dias_sem_venda": 30978
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2182",
+        "valor_estoque_venda": 23394.326637271846,
+        "dias_sem_venda": 33822
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2291",
+        "valor_estoque_venda": 13007.655181873577,
+        "dias_sem_venda": 35069
+      }
+    ]
+  },
+  {
+    "id": "corte_catalogo",
+    "titulo": "Corte de 3.204 SKUs do catalogo",
+    "descricao": "Remover do catalogo os SKUs com score_descarte >=0.65 e receita 12m < R$ 5k. Liquidacao gradual + parada de reposicao.",
+    "skus": 1155,
+    "premissa_taxa_venda": "40% do valor escoa via liquidacao gradual (sem desconto fixo)",
+    "valor_em_estoque": 762548.2874210766,
+    "liberacao_prateleira_R$": 882858.709632,
+    "receita_12m_renunciada_R$": 5650.050000000001,
+    "pct_receita_renunciada": 0.00016393665349365106,
+    "amostra_skus": [
+      {
+        "codigo": "",
+        "nome": "Produto 2195",
+        "score_descarte": 0.75,
+        "valor_estoque_venda": 85884.39302283939
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2484",
+        "score_descarte": 0.75,
+        "valor_estoque_venda": 51148.259284383435
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2048",
+        "score_descarte": 0.75,
+        "valor_estoque_venda": 30257.207813739355
+      },
+      {
+        "codigo": "",
+        "nome": "Produto 2182",
+        "score_descarte": 0.75,
+        "valor_estoque_venda": 21746.345276453947
+      },
+      {
+        "codigo": "COD05070",
+        "nome": "Produto 6241",
+        "score_descarte": 0.75,
+        "valor_estoque_venda": 14530.450305715874
+      }
+    ]
+  },
+  {
+    "id": "renegociar_fornecedores",
+    "titulo": "Renegociar com top 3 fornecedores de encalhe",
+    "descricao": "Negociar devolucao/troca/desconto futuro nos 3 fornecedores que concentram encalhe.",
+    "skus": 23,
+    "premissa_taxa_venda": "30% do valor a custo retorna como credito/devolucao",
+    "fornecedores": [
+      {
+        "nome_fornecedor": "Fornecedor 6",
+        "valor": 13179.863648142378,
+        "valor_custo": 7577.669243957696,
+        "skus": 14
+      },
+      {
+        "nome_fornecedor": "Fornecedor 3",
+        "valor": 12551.761818759587,
+        "valor_custo": 6744.966709108013,
+        "skus": 8
+      }
+    ],
+    "valor_em_estoque": 24269.172043308896,
+    "credito_estimado_R$": 13980.033,
+    "risco": "Relacionamento comercial - usar com cuidado"
+  },
+  {
+    "id": "kits_revisar",
+    "titulo": "Revisar 572 kits sem venda registrada",
+    "descricao": "Esses kits tem estoque mas NENHUMA venda nos ultimos 12m no historico. Provavelmente vendem via componente (Tiny registra venda do componente individual, nao do kit-pai). Investigacao manual: o kit eh bundle real? Esta no site? Cliente compra como kit ou monta os componentes? Decidir caso a caso.",
+    "skus": 195,
+    "valor_em_estoque": 481991.8939537012,
+    "valor_em_estoque_custo": 907889.9299999999,
+    "cdi_mes_perdido_se_for_falso_morto": 10327.24795375,
+    "amostra_skus": [
+      {
+        "codigo": "COD05070",
+        "nome": "Produto 6241",
+        "estoque_atual": 116,
+        "valor_estoque_venda": 16037.599252860171
+      },
+      {
+        "codigo": "COD05069",
+        "nome": "Produto 6240",
+        "estoque_atual": 988,
+        "valor_estoque_venda": 15372.460748072663
+      },
+      {
+        "codigo": "COD04960",
+        "nome": "Produto 6130",
+        "estoque_atual": 61,
+        "valor_estoque_venda": 13058.164978874293
+      },
+      {
+        "codigo": "COD03355",
+        "nome": "Produto 4388",
+        "estoque_atual": 100,
+        "valor_estoque_venda": 10677.519359211983
+      },
+      {
+        "codigo": "COD03820",
+        "nome": "Produto 4902",
+        "estoque_atual": 106,
+        "valor_estoque_venda": 9597.856200061466
+      }
+    ],
+    "risco": "Nao tratar como morto sem confirmar. Pode estar vendendo bem via componente."
+  }
+]

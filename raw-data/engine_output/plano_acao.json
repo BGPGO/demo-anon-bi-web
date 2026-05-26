@@ -1,0 +1,104 @@
+[
+  {
+    "titulo": "Promocao alvo: top 20 encalhes classe A/B",
+    "explicacao": "SKUs que ja foram vendedores (classe A/B) mas hoje estao parados >=90 dias. Promocao agressiva ou e-mail marketing tem alto potencial.",
+    "skus": 6,
+    "valor_em_estoque": 22440.83890492815,
+    "receita_12m": 48333.02420494818,
+    "potencial_recuperacao": 11296.890932780483,
+    "ids_top5": [
+      "P04040",
+      "P01978",
+      "P04063",
+      "P05707",
+      "P00001"
+    ],
+    "nomes_top5": [
+      "Produto 5130",
+      "Produto 2914",
+      "Produto 5156",
+      "Produto 6869",
+      "Produto 933"
+    ]
+  },
+  {
+    "titulo": "Corte do catalogo: 50 SKUs com score >=0.65",
+    "explicacao": "SKUs onde >80% das vendas sao PF, ticket baixo, LTV baixo, e giro baixo. Provavelmente nao se pagam. Libera prateleira sem perda relevante.",
+    "skus": 18,
+    "valor_em_estoque": 3040.8651192608972,
+    "receita_12m": 788.2858567996218,
+    "potencial_recuperacao": 1363.2709920279792,
+    "ids_top5": [
+      "P02714",
+      "P05814",
+      "P04747",
+      "P05879",
+      "P02703"
+    ],
+    "nomes_top5": [
+      "Produto 3670",
+      "Produto 6977",
+      "Produto 5892",
+      "Produto 7042",
+      "Produto 3656"
+    ]
+  },
+  {
+    "titulo": "Renegociar com top 3 fornecedores de encalhe",
+    "explicacao": "Concentracao de valor parado nesses fornecedores. Negociar devolucao/troca/desconto pro proximo pedido.",
+    "fornecedores": [
+      {
+        "nome_fornecedor": "Fornecedor 6",
+        "valor": 12080.705338361675,
+        "skus": 13
+      },
+      {
+        "nome_fornecedor": "Fornecedor 3",
+        "valor": 12767.962061923543,
+        "skus": 8
+      }
+    ],
+    "valor_total": 74203.66184
+  },
+  {
+    "titulo": "Reduzir compra: 20 SKUs em Excesso",
+    "explicacao": "Cobertura acima de 180 dias. Provavelmente comprado em volume sem giro proporcional. Cortar proxima reposicao ate normalizar.",
+    "skus": 7,
+    "valor_em_estoque": 273732.92006992135,
+    "cobertura_media": 319.43402413395285,
+    "ids_top5": [
+      "P00028",
+      "P01265",
+      "P01266",
+      "P01264",
+      "P01263"
+    ],
+    "nomes_top5": [
+      "Produto 960",
+      "Produto 2203",
+      "Produto 2204",
+      "Produto 2202",
+      "Produto 2201"
+    ]
+  },
+  {
+    "titulo": "Repor urgente: 20 SKUs em ruptura iminente",
+    "explicacao": "Cobertura <=14 dias com vendas relevantes. Falta de estoque vai gerar perda de venda.",
+    "skus": 7,
+    "receita_12m": 235720.1250447331,
+    "ids_top5": [
+      "P03627",
+      "P03816",
+      "P02752",
+      "P00017",
+      "P05125"
+    ],
+    "nomes_top5": [
+      "Produto 4676",
+      "Produto 4887",
+      "Produto 3709",
+      "Produto 949",
+      "Produto 6285"
+    ]
+  }
+]

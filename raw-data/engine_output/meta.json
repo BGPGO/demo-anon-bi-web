@@ -1,0 +1,10 @@
+{
+  "gerado_em": "2026-05-13T13:09:32.130210",
+  "snapshot_estoque": "2026-05-13.parquet",
+  "linhas_vendas_12m": 55314,
+  "linhas_vendas_total": 123286,
+  "linhas_dim_produto": 1824,
+  "linhas_vendas_mensal": 16850,
+  "linhas_vendas_semanal": 5531,
+  "cdi_anual": 0.1365
+}
