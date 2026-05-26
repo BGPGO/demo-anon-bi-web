@@ -4,7 +4,7 @@ module.exports = {
   cliente: {
     nome: "Distribuidora XYZ",
     subdomain: "demo-anon",
-    coolify_app_uuid: "",
+    coolify_app_uuid: "jgxqj03ajv3pdiqgji78qr89",
     cor_primaria: "#22d3ee",
   },
   fontes: { adapters: [] }, // sem adapter — dados gerados manualmente por scripts/build_astro_data.py
