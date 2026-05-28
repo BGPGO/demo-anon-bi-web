@@ -7,7 +7,7 @@
  * V2 adiciona reatividade:
  *  - Slider de cenarios de corte (recalcula economia anual on the fly)
  *  - Cross-filter: clicar numa linha de transportadora filtra top piores
- *  - Storytelling literal copiado do Streamlit (Filipe 29/04/2026)
+ *  - Storytelling literal copiado do Streamlit
  *  - 11 blocos (vs 4 da V1)
  *
  * Helpers globais: AstroBarV (com onBarClick + activeIdx), AstroLine,
@@ -108,11 +108,11 @@ const PageFreteRJ = () => {
       }}>
         <div style={{ fontSize: 13.5, lineHeight: 1.55, color: 'var(--text)' }}>
           <p style={{ margin: '0 0 8px' }}>
-            <b style={{ color: 'var(--cyan)' }}>Filipe (29/04/2026):</b>{' '}
+            <b style={{ color: 'var(--cyan)' }}>Diretor comercial:</b>{' '}
             <i>"Frete grátis para o Rio de Janeiro. Cara, eu eliminaria."</i>
           </p>
           <p style={{ margin: '0 0 8px' }}>
-            <b style={{ color: 'var(--violet)' }}>Vitor:</b>{' '}
+            <b style={{ color: 'var(--violet)' }}>Financeiro:</b>{' '}
             <i>"quanto que isso gera no mês de prejuízo?"</i>
           </p>
           <p style={{ margin: 0, color: 'var(--text-2)', fontSize: 12.5 }}>

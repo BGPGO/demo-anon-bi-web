@@ -3,7 +3,7 @@
  *
  * Dados: window.PEDMIN_DATA (scripts/build_pedmin_data.py sobre vendas_tiny_bu.parquet).
  *
- * Estudo solicitado por Filipe (29/04/2026). Storytelling preservado literal.
+ * Estudo solicitado pelo diretor comercial. Storytelling preservado literal.
  * Slider de corte (R$ 50-2000, step 50) recomputa instantaneamente todos KPIs
  * abaixo via useMemo + interpolacao linear sobre cenarios pre-computados.
  *
@@ -254,16 +254,16 @@ const PagePedidoMinimo = () => {
           color: 'var(--text-2)',
         }}>
           <div style={{ marginBottom: 6 }}>
-            <b style={{ color: 'var(--cyan)' }}>Filipe (29/04/26):</b> <i>"Se eu delimito um pedido mínimo de R$ 500, quanto que eu deixo de vender se eu analisar os últimos meses? Chegar a 0,3%."</i>
+            <b style={{ color: 'var(--cyan)' }}>Diretor comercial:</b> <i>"Se eu delimito um pedido mínimo de R$ 500, quanto que eu deixo de vender se eu analisar os últimos meses? Chegar a 0,3%."</i>
           </div>
           <div style={{ marginBottom: 6 }}>
-            <b style={{ color: 'var(--violet)' }}>Vitor:</b> <i>"Faz um histograma, bota uma linha dos R$ 500, só pra enxergar, pra baixo, quantos por cento ficam, e olha o LTV desses clientes também. Daí a gente faz um cruzamento."</i>
+            <b style={{ color: 'var(--violet)' }}>Financeiro:</b> <i>"Faz um histograma, bota uma linha dos R$ 500, só pra enxergar, pra baixo, quantos por cento ficam, e olha o LTV desses clientes também. Daí a gente faz um cruzamento."</i>
           </div>
           <div style={{ marginBottom: 6 }}>
-            <b style={{ color: 'var(--cyan)' }}>Filipe:</b> <i>"se o cara compra pelo CPF, que compra menos de R$ 200, não é um cara que vai ter que comprar todo mês."</i>
+            <b style={{ color: 'var(--cyan)' }}>Diretor comercial:</b> <i>"se o cara compra pelo CPF, que compra menos de R$ 200, não é um cara que vai ter que comprar todo mês."</i>
           </div>
           <div>
-            <b style={{ color: 'var(--violet)' }}>Vitor:</b> <i>cuidado pra não descartar cliente que recompra muito.</i>
+            <b style={{ color: 'var(--violet)' }}>Financeiro:</b> <i>cuidado pra não descartar cliente que recompra muito.</i>
           </div>
         </div>
       </div>
@@ -516,7 +516,7 @@ const PagePedidoMinimo = () => {
         </table>
         <div style={{ marginTop: 12, fontSize: 11, color: 'var(--mute)', lineHeight: 1.5 }}>
           LTV próximo do ticket = compraram 1 vez e sumiram (perda baixa, "descartáveis").
-          LTV muito acima do ticket = recompram pequeno mas com frequência (perda alta — atenção ao alerta do Vitor).
+          LTV muito acima do ticket = recompram pequeno mas com frequência (perda alta — atenção ao alerta do financeiro).
         </div>
       </div>
 
@@ -559,8 +559,8 @@ const PagePedidoMinimo = () => {
             </tbody>
           </table>
           <div style={{ marginTop: 12, fontSize: 11, color: 'var(--mute)', lineHeight: 1.5 }}>
-            Hipótese de Filipe: <i>"se o cara compra pelo CPF que compra menos de R$ 200, não é um cara que vai ter que comprar todo mês"</i>.
-            Compare LTV de PF e PJ. Se LTV PF for elevado mas vier de pedidos pequenos recorrentes, descartá-lo destrói valor (alerta do Vitor).
+            Hipótese do diretor: <i>"se o cara compra pelo CPF que compra menos de R$ 200, não é um cara que vai ter que comprar todo mês"</i>.
+            Compare LTV de PF e PJ. Se LTV PF for elevado mas vier de pedidos pequenos recorrentes, descartá-lo destrói valor (alerta do financeiro).
           </div>
         </div>
       </div>
@@ -661,7 +661,7 @@ const PagePedidoMinimo = () => {
           }
         </p>
         <p style={{ fontSize: 12, color: 'var(--mute)', margin: '10px 0 0', lineHeight: 1.5, fontStyle: 'italic' }}>
-          Atenção (Vitor): mesmo com saldo positivo no agregado, antes de aplicar verifique a tabela de LTV acima.
+          Atenção (financeiro): mesmo com saldo positivo no agregado, antes de aplicar verifique a tabela de LTV acima.
           Se o LTV médio dos clientes que seriam perdidos for muito maior que o ticket médio deles, são <b>recompradores frequentes em pequenos pedidos</b> — e descartá-los destrói relacionamento de longo prazo.
         </p>
       </div>

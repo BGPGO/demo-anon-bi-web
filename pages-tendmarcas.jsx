@@ -64,11 +64,24 @@ const TendmarcasSpark = ({ values, width = 110, height = 28, color = '#22d3ee' }
 
 // ===== Line chart top 10 marcas (serie mensal do ano YTD) =====
 const TendmarcasMultiLine = ({ series, labels, height = 280 }) => {
-  if (!series || !series.length) return <div className="empty" style={{ padding: 24, color: 'var(--mute)' }}>sem dados</div>;
+  // mede container e usa W dinâmico (evita esticamento)
+  const wrapRef = React.useRef(null);
+  const [W, setW] = React.useState(820);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  if (!series || !series.length) return <div ref={wrapRef} className="empty" style={{ padding: 24, color: 'var(--mute)' }}>sem dados</div>;
   // 10 cores distintas
   const PAL = ['#22d3ee', '#10b981', '#f59e0b', '#a78bfa', '#ef4444',
                '#3b82f6', '#fde68a', '#34d399', '#f472b6', '#94a3b8'];
-  const W = 820, H = height, PL = 70, PR = 24, PT = 16, PB = 36;
+  const H = height, PL = 70, PR = 24, PT = 16, PB = 36;
   const innerW = W - PL - PR, innerH = H - PT - PB;
   const N = labels.length;
   // valor max global pra escala compartilhada
@@ -84,8 +97,8 @@ const TendmarcasMultiLine = ({ series, labels, height = 280 }) => {
   const [hovered, setHovered] = React.useState(null); // marca highlight
 
   return (
-    <div>
-      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={{ width: '100%', height, display: 'block' }}>
+    <div ref={wrapRef}>
+      <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height, display: 'block' }}>
         {/* grid + y labels */}
         {yTickVals.map((v, i) => (
           <g key={`yt-${i}`}>
@@ -144,16 +157,29 @@ const TendmarcasMultiLine = ({ series, labels, height = 280 }) => {
 
 // ===== Bar chart top 20 marcas por crescimento % =====
 const TendmarcasGrowthBars = ({ items, height = 460 }) => {
-  if (!items || !items.length) return <div className="empty" style={{ padding: 24, color: 'var(--mute)' }}>sem dados</div>;
+  // mede container e usa W dinâmico (evita esticamento)
+  const wrapRef = React.useRef(null);
+  const [W, setW] = React.useState(720);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  if (!items || !items.length) return <div ref={wrapRef} className="empty" style={{ padding: 24, color: 'var(--mute)' }}>sem dados</div>;
   const sorted = [...items].sort((a, b) => (b.growth_pct || 0) - (a.growth_pct || 0));
   const max = Math.max(...sorted.map((it) => Math.abs(it.growth_pct || 0)), 1);
-  const W = 720;
   const ROW_H = Math.max(20, Math.floor((height - 20) / sorted.length));
   const PL = 130, PR = 90;
   const innerW = W - PL - PR;
   const ZERO_X = PL + innerW / 2;
   return (
-    <svg viewBox={`0 0 ${W} ${height}`} preserveAspectRatio="none" style={{ width: '100%', height, display: 'block' }}>
+    <div ref={wrapRef}>
+    <svg viewBox={`0 0 ${W} ${height}`} style={{ width: '100%', height, display: 'block' }}>
       {/* eixo zero */}
       <line x1={ZERO_X} y1={8} x2={ZERO_X} y2={height - 8} stroke="rgba(255,255,255,0.12)" strokeWidth="1" />
       {sorted.map((it, i) => {
@@ -186,6 +212,7 @@ const TendmarcasGrowthBars = ({ items, height = 460 }) => {
         );
       })}
     </svg>
+    </div>
   );
 };
 

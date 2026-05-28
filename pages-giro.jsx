@@ -200,7 +200,7 @@ const PageGiroEstoque = () => {
           para queima (promocao, e-mail marketing, ajuste de compra).
         </p>
         <p style={{ color: 'var(--text-2)', lineHeight: 1.65, margin: '10px 0 0', maxWidth: 980 }}>
-          <b style={{ color: 'var(--text)' }}>Filipe (13/05/2026):</b> "a metrica certa e
+          <b style={{ color: 'var(--text)' }}>Diretor comercial:</b> "a metrica certa e
           vendas/mes vs estoque (<b>cobertura</b>), nao dias sem venda. Produto pode vender
           1/dia mas ainda ser slow moving se o estoque cobrir 12 meses."
         </p>
