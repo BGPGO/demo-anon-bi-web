@@ -3959,13 +3959,40 @@ html[data-theme="light"] body {
 
 /* ============== MOBILE RESPONSIVO — overrides agressivos pra sobrescrever inline styles ============== */
 @media (max-width: 760px) {
-  /* Inline grids com repeat(N, 1fr) viram 2 colunas */
-  div.grid[style*="repeat("],
-  div[style*="grid-template-columns: repeat"],
-  div[style*="gridTemplateColumns"] {
+  /* Inline grids — regras por aridade pra cada caso ter o layout certo */
+  /* repeat(3+, 1fr) e repeat(4, 1fr) e repeat(6, 1fr) → 2 cols (KPIs cabem) */
+  div.grid[style*="repeat(3, 1fr)"],
+  div.grid[style*="repeat(4, 1fr)"],
+  div.grid[style*="repeat(5, 1fr)"],
+  div.grid[style*="repeat(6, 1fr)"] {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
+  /* repeat(2, 1fr) e grids explícitos com fr (sem px) → 1 col (cards complexos: hierarquia, charts largos, treemaps) */
+  div.grid[style*="repeat(2, 1fr)"],
+  div.grid[style*="grid-template-columns: 1fr 1fr"],
+  div.grid[style*="grid-template-columns: 1fr 1.5fr"],
+  div.grid[style*="grid-template-columns: 1.5fr 1fr"],
+  div.grid[style*="grid-template-columns: 2fr 1fr"],
+  div.grid[style*="grid-template-columns: 1fr 2fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  /* Tabela drill-down hierárquica (Marca → Cat → Sub → Produto):
+     grid interno 1fr 110px 70px 110px 70px 64px = 424px fixos não cabem.
+     Compacta + esconde Resultado (col 4) e Nº (col 6); mantém Nome, Venda, %, Margem. */
+  div[style*="1fr 110px 70px 110px 70px 64px"] {
+    grid-template-columns: 1fr 64px 48px 50px !important;
+    gap: 6px !important;
+    font-size: 10.5px !important;
+  }
+  div[style*="1fr 110px 70px 110px 70px 64px"] > *:nth-child(4),
+  div[style*="1fr 110px 70px 110px 70px 64px"] > *:nth-child(6) {
+    display: none !important;
+  }
+  /* Card pai com overflow:hidden clipa tabelas largas — em mobile, permite scroll horizontal interno */
+  .card { overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; }
+  .kpi-tile { overflow: hidden; }  /* mantém glow contido nos KPIs */
   /* PageHeader empilha title + actions */
   .page-title { flex-direction: column; align-items: stretch; gap: 12px; padding-bottom: 12px; margin-bottom: 10px; }
   .page-title h1 { font-size: 22px; letter-spacing: -0.025em; }
@@ -4012,9 +4039,8 @@ html[data-theme="light"] body {
   .card svg { min-height: 180px; }
 }
 @media (max-width: 460px) {
-  div.grid[style*="repeat("],
-  div[style*="grid-template-columns: repeat"],
-  div[style*="gridTemplateColumns"] {
+  /* Em telas muito estreitas, mesmo KPIs viram 1 col */
+  div.grid[style*="repeat("] {
     grid-template-columns: 1fr !important;
   }
   .kpi-tile .kpi-value { font-size: 28px !important; }
