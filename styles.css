@@ -3956,3 +3956,68 @@ html[data-theme="light"] body {
 [data-theme="light"] .page-title .status-line b {
   color: #0e7490;
 }
+
+/* ============== MOBILE RESPONSIVO — overrides agressivos pra sobrescrever inline styles ============== */
+@media (max-width: 760px) {
+  /* Inline grids com repeat(N, 1fr) viram 2 colunas */
+  div.grid[style*="repeat("],
+  div[style*="grid-template-columns: repeat"],
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  /* PageHeader empilha title + actions */
+  .page-title { flex-direction: column; align-items: stretch; gap: 12px; padding-bottom: 12px; margin-bottom: 10px; }
+  .page-title h1 { font-size: 22px; letter-spacing: -0.025em; }
+  .page-title .crumbs { font-size: 10px; letter-spacing: 0.12em; margin-bottom: 6px; }
+  .page-title .subtitle, .page-title .status-line { font-size: 12px; }
+  .page-title .actions { width: 100%; }
+  /* Cards menores em mobile */
+  .card { padding: 14px; }
+  .kpi-tile { padding: 14px 16px 12px; min-width: 0; }
+  .kpi-tile .kpi-value { font-size: 24px !important; letter-spacing: -0.03em; }
+  .kpi-tile .kpi-value .currency { font-size: 12px !important; }
+  .kpi-tile .kpi-value .unit { font-size: 14px !important; }
+  .kpi-tile .kpi-label { font-size: 10px; letter-spacing: 0.12em; }
+  .kpi-tile .kpi-hint { font-size: 10px; padding: 2px 8px 2px 6px; }
+  .kpi-formula { font-size: 9.5px; padding: 1px 5px; }
+  .card.kpi-mini { padding: 10px 12px; }
+  .card.kpi-mini .kpi-label { font-size: 9.5px; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .card.kpi-mini .kpi-value { font-size: 18px; }
+  /* Page padding mais enxuto */
+  .page { padding: 16px 12px 40px; }
+  /* Header bar */
+  .header { padding: 0 12px; gap: 8px; height: 60px; }
+  .hd-icon-btn { width: 32px; height: 32px; }
+  .hd-icon-btn svg { width: 14px; height: 14px; }
+  .breadcrumb { display: none; }
+  .theme-toggle { width: 32px; height: 32px; margin-left: 4px; }
+  .theme-toggle svg { width: 14px; height: 14px; }
+  /* Filters bar */
+  .filters-bar, .hier-filters, .mkt-filters, .fat-filters, .inline-filterbar {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+  .filters-bar::before { display: none; }
+  /* Tabelas: reduz fonte e padding */
+  table.t { font-size: 11px; }
+  table.t th, table.t td { padding: 8px 10px; }
+  /* Sidebar como drawer (já tem .open via JS); garante fora do flow no mobile */
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 260px; z-index: 100; transform: translateX(-100%); transition: transform 220ms; }
+  .sidebar.open { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,0.5); }
+  .app { grid-template-columns: 1fr; }
+  /* Section titles menores */
+  .section-title, h3.section-title { font-size: 14px !important; margin: 8px 0 10px !important; }
+  /* Charts: cards com height mínima pra não ficar microscópico */
+  .card svg { min-height: 180px; }
+}
+@media (max-width: 460px) {
+  div.grid[style*="repeat("],
+  div[style*="grid-template-columns: repeat"],
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+  .kpi-tile .kpi-value { font-size: 28px !important; }
+  .card.kpi-mini .kpi-value { font-size: 22px; }
+  .page-title h1 { font-size: 20px; }
+}
