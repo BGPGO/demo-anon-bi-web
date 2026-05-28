@@ -3960,23 +3960,51 @@ html[data-theme="light"] body {
 /* ============== MOBILE RESPONSIVO — overrides agressivos pra sobrescrever inline styles ============== */
 @media (max-width: 760px) {
   /* Inline grids — regras por aridade pra cada caso ter o layout certo */
-  /* repeat(3+, 1fr) e repeat(4, 1fr) e repeat(6, 1fr) → 2 cols (KPIs cabem) */
-  div.grid[style*="repeat(3, 1fr)"],
+  /* repeat(4+, 1fr) → 2 cols (KPIs pequenos cabem em 2) */
   div.grid[style*="repeat(4, 1fr)"],
   div.grid[style*="repeat(5, 1fr)"],
   div.grid[style*="repeat(6, 1fr)"] {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 10px !important;
   }
-  /* repeat(2, 1fr) e grids explícitos com fr (sem px) → 1 col (cards complexos: hierarquia, charts largos, treemaps) */
-  div.grid[style*="repeat(2, 1fr)"],
-  div.grid[style*="grid-template-columns: 1fr 1fr"],
-  div.grid[style*="grid-template-columns: 1fr 1.5fr"],
-  div.grid[style*="grid-template-columns: 1.5fr 1fr"],
-  div.grid[style*="grid-template-columns: 2fr 1fr"],
-  div.grid[style*="grid-template-columns: 1fr 2fr"] {
+  /* repeat(3, 1fr) → 1 col em mobile (geralmente são 3 cards de chart que precisam de largura) */
+  div.grid[style*="repeat(3, 1fr)"],
+  div[style*="grid-template-columns: repeat(3, 1fr)"] {
     grid-template-columns: 1fr !important;
     gap: 12px !important;
+  }
+  /* repeat(2, 1fr) e grids explícitos com fr (sem px) → 1 col (cards complexos: hierarquia, charts largos, treemaps) */
+  div.grid[style*="repeat(2, 1fr)"],
+  div[style*="grid-template-columns: repeat(2, 1fr)"],
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="grid-template-columns: 1fr 1.5fr"],
+  div[style*="grid-template-columns: 1.5fr 1fr"],
+  div[style*="grid-template-columns: 2fr 1fr"],
+  div[style*="grid-template-columns: 1fr 2fr"],
+  /* minmax(0, 1fr) ... 320px → 1 col (treemap+tabela em Composição Total) — browser normaliza 0 pra 0px */
+  div[style*="minmax(0, 1fr) 320px"],
+  div[style*="minmax(0px, 1fr) 320px"],
+  div[style*="minmax(0,1fr) 320px"],
+  div[style*="minmax(0px,1fr) 320px"],
+  /* minmax(0,1fr) minmax(0,1fr) (Análise Vendas 2 charts lado-a-lado) */
+  div[style*="minmax(0,1fr) minmax(0,1fr)"],
+  div[style*="minmax(0px,1fr) minmax(0px,1fr)"],
+  div[style*="minmax(0, 1fr) minmax(0, 1fr)"],
+  div[style*="minmax(0px, 1fr) minmax(0px, 1fr)"],
+  /* 1.5fr repeat(N, 1fr) (hero Tendência Produtos) */
+  div[style*="1.5fr repeat"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  /* Composição Venda nested grid (drill-down em N níveis) — também vira 1 col */
+  div[style*="grid-template-columns: repeat(3, minmax(0, 1fr))"],
+  div[style*="grid-template-columns: repeat(3, minmax(0px, 1fr))"],
+  div[style*="grid-template-columns: repeat(4, minmax(0, 1fr))"],
+  div[style*="grid-template-columns: repeat(4, minmax(0px, 1fr))"],
+  div[style*="grid-template-columns: repeat(5, minmax(0, 1fr))"],
+  div[style*="grid-template-columns: repeat(5, minmax(0px, 1fr))"] {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
   }
   /* Tabela drill-down hierárquica (Marca → Cat → Sub → Produto):
      grid interno 1fr 110px 70px 110px 70px 64px = 424px fixos não cabem.

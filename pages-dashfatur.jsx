@@ -20,9 +20,21 @@
 // ===========================================================================
 const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt }) => {
   // Layout CSS flex: cada grupo ocupa flex:1 do container (preenche 100% horizontal);
-  // barras dentro de cada grupo têm width fixa (não esticam).
+  // barras dentro de cada grupo têm width fixa calculada via ResizeObserver pra não colapsar.
+  const wrapRef = React.useRef(null);
+  const [contW, setContW] = React.useState(800);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setContW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   if (!groups || !groups.length || !series || !series.length) {
-    return <div className="empty">sem dados</div>;
+    return <div ref={wrapRef} className="empty">sem dados</div>;
   }
   const fmtFn = fmt || _fmtBRLk;
   const palette = colors || ['#22d3ee', '#10b981', '#a78bfa', '#f59e0b', '#ef4444'];
@@ -31,7 +43,9 @@ const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt })
   if (max === 0) max = 1;
   const N = groups.length;
   const S = series.length;
-  const barW = N <= 6 ? 22 : (N <= 12 ? 16 : 12);
+  // barW dinâmico: cada grupo tem contW/N de espaço; subtrai gap 4px e divide pelas S séries com gap 2px
+  const slotW = Math.max(20, (contW - 4 * N) / N);
+  const barW = Math.max(3, Math.floor((slotW - (S - 1) * 2) / S));
   const labelH = 26;
   const plotH = height - labelH;
 
@@ -46,7 +60,7 @@ const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt })
           </span>
         ))}
       </div>
-      <div style={{ width: '100%', position: 'relative', height }}>
+      <div ref={wrapRef} style={{ width: '100%', position: 'relative', height }}>
         {/* baseline */}
         <div style={{
           position: 'absolute', left: 0, right: 0, bottom: labelH,
