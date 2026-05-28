@@ -81,7 +81,7 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
   if (!E || !E.faturamento || !E.faturamento.items) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>Faturamento por Produto</h1></div></div>
+        <PageHeader title="Faturamento por Produto" breadcrumb={["Demo XYZ", "Faturamento por Produto"]} />
         <div className="card"><h2 className="card-title">Sem dados</h2><p>Rode <code>node build-data-extras.cjs</code> pra gerar data-extras.js.</p></div>
       </div>
     );
@@ -182,18 +182,12 @@ const PageFaturamentoProduto = ({ drilldown, setDrilldown }) => {
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Faturamento por Produto</h1>
-          <div className="status-line">
-            {T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}
-            {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}
-          </div>
-        </div>
-        <div className="actions">
-          {filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
-        </div>
-      </div>
+      <PageHeader
+        title="Faturamento por Produto"
+        subtitle={<>{T.numNFs} NFs · {T.numProdutos} produtos · {T.numClientes} clientes · ano {T.anoRef}{filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}</>}
+        breadcrumb={["Demo XYZ", "Faturamento por Produto"]}
+        actions={filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
+      />
 
       {/* ===== Header de filtros funcionais ===== */}
       <div className="fat-filters">
@@ -294,7 +288,7 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
   if (!E || !E.abc) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>Curva ABC</h1></div></div>
+        <PageHeader title="Curva ABC" breadcrumb={["Demo XYZ", "Curva ABC"]} />
         <div className="card"><h2 className="card-title">Sem dados</h2><p>Rode <code>node build-data-extras.cjs</code>.</p></div>
       </div>
     );
@@ -339,20 +333,19 @@ const PageCurvaABC = ({ drilldown, setDrilldown }) => {
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Curva ABC de Produtos</h1>
-          <div className="status-line">{A.total} produtos · A: {A.counts.A} · B: {A.counts.B} · C: {A.counts.C}</div>
-        </div>
-        <div className="actions">
+      <PageHeader
+        title="Curva ABC de Produtos"
+        subtitle={`${A.total} produtos · A: ${A.counts.A} · B: ${A.counts.B} · C: ${A.counts.C}`}
+        breadcrumb={["Demo XYZ", "Curva ABC"]}
+        actions={
           <div className="seg">
             <button className={classFilter === "todas" ? "active" : ""} onClick={() => setClassFilter("todas")}>Todas</button>
             <button className={classFilter === "A" ? "active" : ""} onClick={() => setClassFilter("A")}>A (top)</button>
             <button className={classFilter === "B" ? "active" : ""} onClick={() => setClassFilter("B")}>B</button>
             <button className={classFilter === "C" ? "active" : ""} onClick={() => setClassFilter("C")}>C</button>
           </div>
-        </div>
-      </div>
+        }
+      />
 
       <div className="kpi-row">
         {totaisPorClasse.map(t => (
@@ -576,7 +569,7 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
   if (!E || !E.ads) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>Marketing ADS</h1></div></div>
+        <PageHeader title="Marketing ADS" breadcrumb={["Demo XYZ", "Marketing ADS"]} />
         <div className="card"><h2 className="card-title">Sem dados</h2><p>Rode <code>node build-data-extras.cjs</code>.</p></div>
       </div>
     );
@@ -665,18 +658,12 @@ const PageMarketing = ({ drilldown, setDrilldown }) => {
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Análise Profunda — Marketing ADS</h1>
-          <div className="status-line">
-            {T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}
-            {filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}
-          </div>
-        </div>
-        <div className="actions">
-          {filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
-        </div>
-      </div>
+      <PageHeader
+        title="Análise Profunda — Marketing ADS"
+        subtitle={<>{T.numCampanhas} campanhas · gasto total R$ {formatBR(T.gastoTotal)}{filtroAtivo && <> · <b style={{ color: "var(--cyan)" }}>filtrado</b></>}</>}
+        breadcrumb={["Demo XYZ", "Marketing ADS"]}
+        actions={filtroAtivo && <button className="btn-ghost" onClick={limparFiltros}>Limpar filtros</button>}
+      />
 
       {/* ===== Header de filtros funcionais ===== */}
       <div className="mkt-filters">

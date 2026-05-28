@@ -224,22 +224,15 @@ const PageAnaliseVendas = () => {
 
   // ===== UI =====
   return (
-    <div className="page" style={{ padding: '20px 28px 40px', maxWidth: 1400, margin: '0 auto' }}>
-      {/* Header */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Análise de Vendas</b>
-      </div>
+    <div className="page">
+      <PageHeader
+        title="Análise de Vendas"
+        subtitle="Visão granular · filtros por marca, ano-mês, categoria · KPIs gerais e drill-down"
+        breadcrumb={["Demo BI", "Análise de Vendas"]}
+      />
 
       {/* Filtros sticky */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 10,
-        background: 'var(--bg)', padding: '10px 0', marginBottom: 14,
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap',
-      }}>
-        <span style={{ fontSize: 11, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 1 }}>Filtros:</span>
+      <div className="filters-bar" style={{ position: 'sticky', top: 0, zIndex: 10, gap: 12, marginBottom: 14 }}>
         <select value={filtroAnoMes} onChange={(e) => setFiltroAnoMes(e.target.value)}
                 className="filter-select" style={{ minWidth: 130, fontSize: 12 }}>
           <option value="">Todos meses</option>

@@ -363,27 +363,16 @@ const PageTendenciaMarcas = () => {
 
   return (
     <div className="page bi-dashboard-theme" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Tendências · Marcas</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
-          YTD {meta.ano_ytd} (jan-{meta.mes_ref_label}) vs PYTD {meta.ano_pytd} · top {meta.n_marcas_top} marcas
-        </span>
-      </div>
-
-      <h1 style={{
-        fontSize: '1.6rem', fontWeight: 900, lineHeight: 1.15, marginBottom: 6,
-        background: 'linear-gradient(135deg, #4fc3f7, #81d4fa)',
-        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-      }}>
-        Tendências de Marcas · YTD vs PYTD
-      </h1>
-      <p style={{ fontSize: 13, color: 'var(--text-2)', maxWidth: 920, lineHeight: 1.6, marginBottom: 18 }}>
-        Compara o acumulado do ano (até {meta.mes_ref_label}/{meta.ano_ytd}) contra o mesmo recorte do ano anterior,
-        marca a marca. Inclui regressão linear (vendas/mês) e regressão log (% de crescimento mensal sustentado)
-        sobre toda a série histórica de cada marca.
-      </p>
+      <PageHeader
+        title="Tendências de Marcas · YTD vs PYTD"
+        subtitle={<>Acumulado do ano (até {meta.mes_ref_label}/{meta.ano_ytd}) contra mesmo recorte do ano anterior · regressão linear + log sobre toda a série</>}
+        breadcrumb={["Demo BI", "Tendências · Marcas"]}
+        actions={
+          <span style={{ fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
+            YTD {meta.ano_ytd} vs PYTD {meta.ano_pytd} · top {meta.n_marcas_top} marcas
+          </span>
+        }
+      />
 
       {/* KPIs */}
       <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 22 }}>

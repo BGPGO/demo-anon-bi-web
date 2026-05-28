@@ -397,12 +397,11 @@ const PageCurvaABCAstro = () => {
 
   return (
     <div className="page bi-dashboard-theme" style={{ padding: '20px 28px 40px' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Curva ABC</b>
-      </div>
+      <PageHeader
+        title="Curva ABC · Concentração de receita por produto"
+        subtitle="Quais SKUs concentram receita · A (até 80%) · B (80-95%) · C (95-100%) · Pareto em ação"
+        breadcrumb={["Demo BI", "Curva ABC"]}
+      />
 
       {/* === Storytelling === */}
       <div className="card" style={{ padding: 18, marginBottom: 22, borderLeft: '3px solid var(--cyan)' }}>

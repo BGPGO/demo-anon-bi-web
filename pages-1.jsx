@@ -208,14 +208,11 @@ const PageOverview = ({ filters, setFilters, onOpenFilters, statusFilter, drilld
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Visão Geral</h1>
-          <div className="status-line">Cliente · ano {refYear} · status <b>{statusLabel}</b></div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Visão Geral"
+        subtitle={<>Cliente · ano {refYear} · status <b>{statusLabel}</b></>}
+        breadcrumb={["Demo XYZ", "Visão Geral"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
@@ -311,14 +308,11 @@ const PageIndicators = ({ statusFilter, drilldown, setDrilldown, year, month }) 
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Indicadores</h1>
-          <div className="status-line">Receita, despesa, valor líquido e margem · {statusFilter === "realizado" ? "realizado" : statusFilter === "tudo" ? "tudo" : "pendente"}</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Indicadores"
+        subtitle={`Receita, despesa, valor líquido e margem · ${statusFilter === "realizado" ? "realizado" : statusFilter === "tudo" ? "tudo" : "pendente"}`}
+        breadcrumb={["Demo XYZ", "Indicadores"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
@@ -403,14 +397,11 @@ const PageReceita = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Receita</h1>
-          <div className="status-line">Composição por categoria, cliente e mês</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Receita"
+        subtitle="Composição por categoria, cliente e mês"
+        breadcrumb={["Demo XYZ", "Receita"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
@@ -504,14 +495,11 @@ const PageDespesa = ({ filters, setFilters, onOpenFilters, statusFilter, drilldo
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Despesa</h1>
-          <div className="status-line">Composição por categoria, fornecedor e mês</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Despesa"
+        subtitle="Composição por categoria, fornecedor e mês"
+        breadcrumb={["Demo XYZ", "Despesa"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 

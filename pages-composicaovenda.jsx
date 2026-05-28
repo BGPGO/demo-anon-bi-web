@@ -360,22 +360,16 @@ const PageComposicaoVenda = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <span>Power BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Composição de Venda</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
-          {status.ready ? `DuckDB ready${status.bootMs ? ` (${status.bootMs}ms)` : ''}` : 'Carregando parquet…'}
-        </span>
-      </div>
-
-      <h1 style={{ margin: '0 0 4px', fontSize: 22, fontWeight: 700 }}>Composição de Venda · Drill encadeado</h1>
-      <p style={{ margin: '0 0 14px', fontSize: 12, color: 'var(--mute)' }}>
-        Réplica reativa do PBI 14. Cinco níveis em cascata: Categoria → Marca → SubCategoria → UF → Transportadora.
-        Clique numa barra pra ancorar o valor no path do drill; cada nível seguinte recalcula o Top 10 restrito ao path. Métrica: Vendas/Dia útil.
-      </p>
+      <PageHeader
+        title="Composição de Venda · Drill encadeado"
+        subtitle="5 níveis em cascata: Categoria → Marca → SubCategoria → UF → Transportadora · clique numa barra pra ancorar"
+        breadcrumb={["Demo BI", "Power BI", "Composição de Venda"]}
+        actions={
+          <span style={{ fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
+            {status.ready ? `DuckDB ready${status.bootMs ? ` (${status.bootMs}ms)` : ''}` : 'Carregando parquet…'}
+          </span>
+        }
+      />
 
       <FilterBarAstro filters={filters} setF={setF} />
       <ActiveChips filters={filters} setF={setF} />

@@ -233,17 +233,14 @@ const PagePedidoMinimo = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Pedido Mínimo</b>
-      </div>
+      <PageHeader
+        title="Pedido mínimo × LTV — vale a pena cortar?"
+        subtitle={<>Instituir pedido mínimo custaria quanto em receita · perfil de LTV dos clientes que ficariam de fora · {_fmtNum(K.total_pedidos)} pedidos / {_fmtNum(K.total_clientes_unicos)} clientes ({periodo.inicio} → {periodo.fim})</>}
+        breadcrumb={["Demo BI", "Pedido Mínimo"]}
+      />
 
       {/* === Hero / Storytelling === */}
       <div className="card" style={{ padding: 22, marginBottom: 18, background: 'linear-gradient(135deg, rgba(34,211,238,0.08), rgba(139,92,246,0.06))' }}>
-        <h1 style={{ fontSize: 22, fontWeight: 600, color: 'var(--text)', margin: 0, marginBottom: 10 }}>
-          Pedido mínimo × LTV do cliente — vale a pena cortar?
-        </h1>
         <p style={{ fontSize: 13, color: 'var(--text-2)', margin: 0, marginBottom: 14, lineHeight: 1.55 }}>
           Instituir pedido mínimo de R$ X custaria quanto em receita? Os clientes que ficariam de fora — têm LTV alto (perda real) ou são compradores únicos (perda baixa)? Análise sobre <b>{_fmtNum(K.total_pedidos)}</b> pedidos de <b>{_fmtNum(K.total_clientes_unicos)}</b> clientes ({periodo.inicio} → {periodo.fim}).
         </p>

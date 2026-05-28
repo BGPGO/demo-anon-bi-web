@@ -67,22 +67,19 @@ const PageGeralComercial = () => {
 
   return (
     <div className="page bi-dashboard-theme" style={{ padding: '20px 28px 40px' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Geral · Marketing & Comercial</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
-          mes referencia: {mesLabel(mes)}
-        </span>
-      </div>
+      <PageHeader
+        title="Geral · Marketing & Comercial"
+        subtitle="Visão consolidada · top marcas, categorias, UFs e produtos por mês"
+        breadcrumb={["Demo BI", "Geral"]}
+        actions={
+          <span style={{ fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
+            mês referência: {mesLabel(mes)}
+          </span>
+        }
+      />
 
       {/* Header / Filtros */}
-      <div style={{
-        display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap',
-        padding: '10px 14px', marginBottom: 18, background: 'rgba(255,255,255,0.025)',
-        border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8,
-      }}>
+      <div className="filters-bar" style={{ gap: 12, marginBottom: 18 }}>
         <span style={{ fontSize: 11, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 1 }}>Ano, Mes:</span>
         <select value={mes} onChange={(e) => setMes(e.target.value)}
           style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4, color: 'var(--text)', fontSize: 12, padding: '4px 8px', minWidth: 120 }}>

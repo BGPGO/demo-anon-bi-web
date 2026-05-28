@@ -63,8 +63,21 @@ const _buildWhereVDU = (f) => {
 
 // ===== Heatmap SVG (top N marcas x M meses) =====
 const VduHeatmap = ({ rows, marcas, meses, onCellClick, activeCell }) => {
+  // Mede container e calcula cellW dinâmico pra preencher 100% horizontal.
+  const wrapRef = React.useRef(null);
+  const [contW, setContW] = React.useState(1200);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setContW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   if (!rows || !rows.length || !marcas.length || !meses.length) {
-    return <div className="empty">sem dados</div>;
+    return <div ref={wrapRef} className="empty">sem dados</div>;
   }
   // index rapido (marca, am) -> { rs_dia_util, v, dias_uteis }
   const byKey = {};
@@ -78,14 +91,17 @@ const VduHeatmap = ({ rows, marcas, meses, onCellClick, activeCell }) => {
 
   const labelW = 130;
   const cellH = 26;
-  const cellW = 64;
   const padTop = 36;
   const padBot = 24;
-  const W = labelW + cellW * meses.length + 24;
+  const padR = 24;
+  const minCellW = 48;
+  // cellW preenche o container; se ficar abaixo do mínimo legível, mantém mínimo e ativa scroll horizontal
+  const cellW = Math.max(minCellW, Math.floor((contW - labelW - padR) / meses.length));
+  const W = labelW + cellW * meses.length + padR;
   const H = padTop + cellH * marcas.length + padBot;
 
   return (
-    <div style={{ width: '100%', overflowX: 'auto' }}>
+    <div ref={wrapRef} style={{ width: '100%', overflowX: 'auto' }}>
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: 'block', minWidth: W }}>
         {/* Cabecalho meses */}
         {meses.map((am, ci) => {
@@ -324,29 +340,19 @@ const PageVendasDiaUtil = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Vendas / Dia útil</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
-          {status.ready ? 'DuckDB ready' : 'Carregando parquet…'}
-        </span>
-      </div>
-
-      <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 700 }}>Vendas / Dia útil · Marca × Mês</h1>
-      <p style={{ margin: '0 0 14px', fontSize: 12, color: 'var(--mute)' }}>
-        Heatmap reativo: cada célula = SUM(valor_rateado) ÷ DISTINCT(dias_uteis) daquela marca naquele mês.
-        Clique numa célula pra cross-filtrar a Dash.
-      </p>
+      <PageHeader
+        title="Vendas / Dia útil · Marca × Mês"
+        subtitle="Heatmap reativo · SUM(valor_rateado) ÷ DISTINCT(dias_uteis) · clique pra cross-filtrar"
+        breadcrumb={["Demo BI", "Vendas / Dia útil"]}
+        actions={
+          <span style={{ fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
+            {status.ready ? 'DuckDB ready' : 'Carregando parquet…'}
+          </span>
+        }
+      />
 
       {/* Filtros sticky compactos */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 20,
-        background: 'rgba(13,18,22,0.92)', backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '12px 0', marginBottom: 16,
-      }}>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+      <div className="filters-bar" style={{ position: 'sticky', top: 0, zIndex: 20, alignItems: 'flex-end' }}>
           <MultiSelect label="Ano-Mês" options={opts.ano_mes || []} value={filters.anoMes}
                        onChange={(v) => setF({ anoMes: v })} width={170} />
           <MultiSelect label="Marca" options={opts.marca || []} value={filters.marca}
@@ -369,7 +375,6 @@ const PageVendasDiaUtil = () => {
               LIMPAR
             </button>
           ) : null}
-        </div>
       </div>
 
       {!status.ready ? (

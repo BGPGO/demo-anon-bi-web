@@ -384,11 +384,11 @@ const PageComposicaoVendaTotal = () => {
 
   return (
     <div className="page" style={{ padding: 16 }}>
-      {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'baseline', gap: 16, marginBottom: 12, flexWrap: 'wrap' }}>
-        <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700, color: 'var(--text)' }}>Composição de Venda (Total)</h2>
-        <span style={{ fontSize: 12, color: 'var(--mute)' }}>Treemap Marca → Produto · clique numa marca pra detalhar produtos</span>
-      </div>
+      <PageHeader
+        title="Composição de Venda (Total)"
+        subtitle="Treemap Marca → Produto · clique numa marca pra detalhar produtos"
+        breadcrumb={["Demo BI", "Composição de Venda Total"]}
+      />
 
       {/* Filtro periodo */}
       <div style={{ display: 'flex', gap: 8, marginBottom: 12, alignItems: 'center', flexWrap: 'wrap' }}>

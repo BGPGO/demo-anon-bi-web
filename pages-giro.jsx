@@ -181,17 +181,16 @@ const PageGiroEstoque = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Giro de Estoque</b>
-        {meta.data_snapshot ? (
-          <span style={{ marginLeft: 'auto', color: 'var(--mute)', fontSize: 12 }}>
+      <PageHeader
+        title="Giro de Estoque"
+        subtitle="Dinheiro parado em produtos de baixa velocidade · lista acionável pra queima (promo, e-mail, ajuste de compra)"
+        breadcrumb={["Demo BI", "Giro de Estoque"]}
+        actions={meta.data_snapshot ? (
+          <span style={{ color: 'var(--mute)', fontSize: 12 }}>
             Snapshot: {String(meta.data_snapshot).slice(0, 10)}
           </span>
         ) : null}
-      </div>
+      />
 
       {/* === Bloco 0a: Storytelling === */}
       <div className="card" style={{ padding: 18, marginBottom: 16 }}>

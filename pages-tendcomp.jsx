@@ -247,47 +247,36 @@ const PageTendenciaComposicao = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      {/* === Breadcrumb === */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <span style={{ color: 'var(--mute)' }}>Power BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Tendência de Composição</b>
-      </div>
-
-      {/* === Header: título + filtro ano === */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18, gap: 16, flexWrap: 'wrap' }}>
-        <div>
-          <h2 style={{ margin: 0, fontSize: 22, fontWeight: 700 }}>Tendência de Composição</h2>
-          <div style={{ color: 'var(--mute)', fontSize: 12.5, marginTop: 4 }}>
-            Como cada marca e categoria evolui mês a mês dentro do ano. Top 20 por venda total.
+      <PageHeader
+        title="Tendência de Composição"
+        subtitle="Como cada marca e categoria evolui mês a mês dentro do ano · Top 20 por venda total"
+        breadcrumb={["Demo BI", "Power BI", "Tendência de Composição"]}
+        actions={
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <span style={{ fontSize: 12, color: 'var(--mute)' }}>Ano:</span>
+            {anos.map((a) => (
+              <button
+                key={a}
+                className={`btn-chip ${a === ano ? 'active' : ''}`}
+                onClick={() => setAno(a)}
+                style={{
+                  padding: '6px 14px',
+                  background: a === ano ? 'var(--cyan)' : 'transparent',
+                  color: a === ano ? '#0a1118' : 'var(--text-2)',
+                  border: '1px solid ' + (a === ano ? 'var(--cyan)' : 'var(--border)'),
+                  borderRadius: 6,
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 600,
+                  fontSize: 12,
+                  cursor: 'pointer',
+                }}
+              >
+                {a}
+              </button>
+            ))}
           </div>
-        </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <span style={{ fontSize: 12, color: 'var(--mute)' }}>Ano:</span>
-          {anos.map((a) => (
-            <button
-              key={a}
-              className={`btn-chip ${a === ano ? 'active' : ''}`}
-              onClick={() => setAno(a)}
-              style={{
-                padding: '6px 14px',
-                background: a === ano ? 'var(--cyan)' : 'transparent',
-                color: a === ano ? '#0a1118' : 'var(--text-2)',
-                border: '1px solid ' + (a === ano ? 'var(--cyan)' : 'var(--border)'),
-                borderRadius: 6,
-                fontFamily: 'var(--font-mono)',
-                fontWeight: 600,
-                fontSize: 12,
-                cursor: 'pointer',
-              }}
-            >
-              {a}
-            </button>
-          ))}
-        </div>
-      </div>
+        }
+      />
 
       {/* === KPIs do ano === */}
       <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 22 }}>

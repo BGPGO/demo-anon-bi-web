@@ -40,7 +40,7 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
   if (!E || !E.ads || !E.ads.rows || E.ads.rows.length === 0) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>Hierarquia ADS</h1></div></div>
+        <PageHeader title="Hierarquia ADS" breadcrumb={["Demo XYZ", "Hierarquia ADS"]} />
         <div className="card">
           <h2 className="card-title">Sem dados</h2>
           <p>Rode <code>node build-data-extras.cjs</code> pra gerar os dados das campanhas Facebook ADS.</p>
@@ -274,16 +274,11 @@ const PageHierarquia = ({ statusFilter, year, month, drilldown, setDrilldown }) 
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Hierarquia — Campanhas</h1>
-          <div className="status-line">
-            {tree.length} campanhas · {rowsFiltered.length} linhas
-          </div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Hierarquia — Campanhas"
+        subtitle={`${tree.length} campanhas · ${rowsFiltered.length} linhas`}
+        breadcrumb={["Demo XYZ", "Hierarquia · Campanhas"]}
+      />
 
       {/* Filtros funcionais (Campanha + Anúncio aplicam de fato no rowsFiltered) */}
       <div className="hier-filters">
@@ -354,7 +349,7 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
   if (!E || !E.faturamento || !E.abc) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>Detalhado</h1></div></div>
+        <PageHeader title="Detalhado" breadcrumb={["Demo XYZ", "Detalhado"]} />
         <div className="card">
           <h2 className="card-title">Sem dados</h2>
           <p>Rode <code>node build-data-extras.cjs</code>.</p>
@@ -429,16 +424,11 @@ const PageDetalhado = ({ statusFilter, year, month, drilldown, setDrilldown }) =
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Detalhamento</h1>
-          <div className="status-line">
-            {familias.length} familias · {clientes.length} clientes · {produtos.length} produtos
-          </div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Detalhamento"
+        subtitle={`${familias.length} famílias · ${clientes.length} clientes · ${produtos.length} produtos`}
+        breadcrumb={["Demo XYZ", "Detalhamento"]}
+      />
 
       {/* KPIs */}
       <div className="kpi-row">
@@ -600,16 +590,11 @@ const PageProfundaCliente = ({ statusFilter, year, month, drilldown, setDrilldow
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Profunda Cliente</h1>
-          <div className="status-line">
-            {clientesAgg.length} clientes · {year || REF_YEAR} · meses {mesIni + 1}-{mesFim + 1}
-          </div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Profunda Cliente"
+        subtitle={`${clientesAgg.length} clientes · ${year || REF_YEAR} · meses ${mesIni + 1}-${mesFim + 1}`}
+        breadcrumb={["Demo XYZ", "Profunda Cliente"]}
+      />
 
       {/* Filtros */}
       <div className="hier-filters">
@@ -736,7 +721,7 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
   if (!hasData) {
     return (
       <div className="page">
-        <div className="page-title"><div><h1>CRM</h1></div></div>
+        <PageHeader title="CRM" breadcrumb={["Demo XYZ", "CRM"]} />
         <div className="card">
           <h2 className="card-title">Sem dados de CRM</h2>
           <p>Rode <code>node build-data-extras.cjs</code> pra extrair <code>consolidado (33).xlsx</code>.</p>
@@ -856,16 +841,11 @@ const PageCRM = ({ statusFilter, year, month, drilldown, setDrilldown }) => {
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>CRM — Pipeline de Oportunidades</h1>
-          <div className="status-line">
-            {C.rows.length} leads · ganhos {T.totalGanhos} · perdidos {T.totalPerdidos} · abertos {T.totalAbertos} · {monthIdxFiltered != null ? `${MESES_NOMES[monthIdxFiltered]}/${T.anoCRM}` : `ano ${T.anoCRM}`}
-          </div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="CRM — Pipeline de Oportunidades"
+        subtitle={`${C.rows.length} leads · ganhos ${T.totalGanhos} · perdidos ${T.totalPerdidos} · abertos ${T.totalAbertos} · ${monthIdxFiltered != null ? `${MESES_NOMES[monthIdxFiltered]}/${T.anoCRM}` : `ano ${T.anoCRM}`}`}
+        breadcrumb={["Demo XYZ", "CRM"]}
+      />
 
       {/* KPIs topo (5: Leads, Conversão, Vendas no mês, Pipeline, Ganho) */}
       <div className="kpi-row">

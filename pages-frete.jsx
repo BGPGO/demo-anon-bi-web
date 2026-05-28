@@ -93,12 +93,11 @@ const PageFreteRJ = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      {/* === Breadcrumb === */}
-      <div className="breadcrumb" style={{ marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Frete RJ</b>
-      </div>
+      <PageHeader
+        title="Frete RJ"
+        subtitle="Custo de frete grátis para o Rio de Janeiro · análise por faixa de valor de pedido"
+        breadcrumb={["Demo BI", "Frete RJ"]}
+      />
 
       {/* === BLOCO 1: Storytelling literal do Streamlit === */}
       <div style={{

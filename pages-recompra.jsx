@@ -276,13 +276,12 @@ const PageRecompra = () => {
 
   // ===== UI =====
   return (
-    <div className="page" style={{ padding: '20px 28px 40px', maxWidth: 1400, margin: '0 auto' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>A História da Recompra</b>
-      </div>
+    <div className="page">
+      <PageHeader
+        title="A História da Recompra"
+        subtitle="Quem volta, quando volta, e quanto vale · série temporal + histograma de tempo entre compras"
+        breadcrumb={["Demo BI", "Recompra"]}
+      />
 
       {/* ====== STORYTELLING ABERTURA ====== */}
       <div style={{
@@ -316,13 +315,7 @@ const PageRecompra = () => {
       </div>
 
       {/* ====== FILTROS STICKY ====== */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 10,
-        background: 'var(--bg)', padding: '10px 0', marginBottom: 14,
-        borderBottom: '1px solid var(--border)',
-        display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap',
-      }}>
-        <span style={{ fontSize: 11, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 1 }}>Filtros:</span>
+      <div className="filters-bar" style={{ position: 'sticky', top: 0, zIndex: 10, gap: 12 }}>
         <select value={filtroUF} onChange={(e) => setFiltroUF(e.target.value)}
                 className="filter-select" style={{ minWidth: 100, fontSize: 12 }}>
           <option value="">Todas UFs</option>

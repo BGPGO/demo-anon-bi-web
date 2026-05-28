@@ -95,45 +95,33 @@ function PageCohort() {
   const tableH = 36 + cellH * (cohorts.length + 1) + (focused ? 36 : 0); // +1 total row
 
   return (
-    <div className="content" style={{ paddingTop: 12 }}>
-      {/* ===== Header com toggle ===== */}
-      <div style={{
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        marginBottom: 16, gap: 16, flexWrap: 'wrap',
-      }}>
-        <div>
-          <div style={{
-            fontSize: 10, fontWeight: 700, letterSpacing: 3,
-            color: 'var(--cyan)', textTransform: 'uppercase',
-          }}>Cohort triangular</div>
-          <h2 style={{ fontSize: 22, fontWeight: 700, margin: '4px 0 0', color: 'var(--text)' }}>
-            {metric === 'valor' ? 'Cohort do Valor de Vendas' : 'Cohort do Numero de Vendas'}
-          </h2>
-          <div style={{ fontSize: 12, color: 'var(--mute)', marginTop: 4 }}>
-            Linhas = mes da 1a compra · Colunas = mes de atividade · {cohorts.length} cohorts × {meses.length} meses
+    <div className="page">
+      <PageHeader
+        title={metric === 'valor' ? 'Cohort do Valor de Vendas' : 'Cohort do Número de Vendas'}
+        subtitle={`Linhas = mês da 1ª compra · Colunas = mês de atividade · ${cohorts.length} cohorts × ${meses.length} meses`}
+        actions={
+          <div style={{ display: 'flex', gap: 6, background: 'rgba(255,255,255,0.04)', padding: 4, borderRadius: 8 }}>
+            <button
+              onClick={() => setMetric('valor')}
+              style={{
+                background: metric === 'valor' ? 'var(--cyan)' : 'transparent',
+                color: metric === 'valor' ? '#0c111c' : 'var(--text-2)',
+                border: 'none', padding: '8px 16px', borderRadius: 6,
+                fontWeight: 600, fontSize: 12, cursor: 'pointer',
+              }}
+            >Valor (R$)</button>
+            <button
+              onClick={() => setMetric('vendas')}
+              style={{
+                background: metric === 'vendas' ? 'var(--cyan)' : 'transparent',
+                color: metric === 'vendas' ? '#0c111c' : 'var(--text-2)',
+                border: 'none', padding: '8px 16px', borderRadius: 6,
+                fontWeight: 600, fontSize: 12, cursor: 'pointer',
+              }}
+            >Vendas (n_pedidos)</button>
           </div>
-        </div>
-        <div style={{ display: 'flex', gap: 6, background: 'rgba(255,255,255,0.04)', padding: 4, borderRadius: 8 }}>
-          <button
-            onClick={() => setMetric('valor')}
-            style={{
-              background: metric === 'valor' ? 'var(--cyan)' : 'transparent',
-              color: metric === 'valor' ? '#0c111c' : 'var(--text-2)',
-              border: 'none', padding: '8px 16px', borderRadius: 6,
-              fontWeight: 600, fontSize: 12, cursor: 'pointer',
-            }}
-          >Valor (R$)</button>
-          <button
-            onClick={() => setMetric('vendas')}
-            style={{
-              background: metric === 'vendas' ? 'var(--cyan)' : 'transparent',
-              color: metric === 'vendas' ? '#0c111c' : 'var(--text-2)',
-              border: 'none', padding: '8px 16px', borderRadius: 6,
-              fontWeight: 600, fontSize: 12, cursor: 'pointer',
-            }}
-          >Vendas (n_pedidos)</button>
-        </div>
-      </div>
+        }
+      />
 
       {/* ===== KPI strip ===== */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, minmax(140px, 1fr))', gap: 12, marginBottom: 16 }}>

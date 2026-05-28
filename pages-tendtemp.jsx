@@ -255,28 +255,19 @@ const PageTendenciaTemporal = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Tendência Temporal</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--mute)' }}>
-          {D.meta && `${_fmtDiaBRLong(D.meta.dia_min)} → ${_fmtDiaBRLong(D.meta.dia_max)}`}
-        </span>
-      </div>
-
-      <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 700 }}>Tendência Temporal</h1>
-      <p style={{ margin: '0 0 14px', fontSize: 12, color: 'var(--mute)' }}>
-        Evolução diária de vendas, recompradores vs novos clientes e ticket médio. Réplica da tela TENDENCIA TEMPORAL do PBI.
-      </p>
+      <PageHeader
+        title="Tendência Temporal"
+        subtitle="Evolução diária de vendas · recompradores vs novos clientes · ticket médio"
+        breadcrumb={["Demo BI", "Tendência Temporal"]}
+        actions={
+          <span style={{ fontSize: 11, color: 'var(--mute)' }}>
+            {D.meta && `${_fmtDiaBRLong(D.meta.dia_min)} → ${_fmtDiaBRLong(D.meta.dia_max)}`}
+          </span>
+        }
+      />
 
       {/* Filtro de período */}
-      <div style={{
-        position: 'sticky', top: 0, zIndex: 20,
-        background: 'rgba(13,18,22,0.92)', backdropFilter: 'blur(8px)',
-        borderBottom: '1px solid var(--border)',
-        padding: '12px 0', marginBottom: 16,
-        display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap',
-      }}>
+      <div className="filters-bar" style={{ position: 'sticky', top: 0, zIndex: 20, gap: 18 }}>
         <div>
           <div style={{ fontSize: 10, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 0.4, marginBottom: 4 }}>Período</div>
           <div className="seg" style={{ display: 'flex' }}>

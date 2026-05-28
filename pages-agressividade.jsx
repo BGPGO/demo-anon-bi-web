@@ -415,19 +415,15 @@ const PageAgressividade = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      {/* === Breadcrumb === */}
-      <div className="breadcrumb" style={{ marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8, fontSize: 13 }}>
-        <span style={{ color: 'var(--mute)' }}>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b style={{ color: 'var(--text)' }}>Agressividade de Budget</b>
-      </div>
+      <PageHeader
+        title="Aumentos bruscos de budget travam o Google Ads?"
+        subtitle={<>Variação diária do gasto vs ROAS desde {k.periodo_de} ({k.n_dias_observados} dias úteis, sem outliers 3σ) · arraste o slider pra redefinir "dia agressivo"</>}
+        breadcrumb={["Demo BI", "Agressividade de Budget"]}
+      />
 
       {/* === HERO + STORYTELLING TESE === */}
       <div className="card" style={{ marginBottom: 20, padding: '20px 24px', background: 'linear-gradient(135deg, rgba(239,83,80,0.08), rgba(249,168,37,0.06))', borderLeft: '3px solid var(--red)' }}>
-        <h1 style={{ fontSize: 26, fontWeight: 800, margin: 0, color: 'var(--text)' }}>
-          Aumentos bruscos de budget travam o Google Ads?
-        </h1>
-        <p style={{ margin: '10px 0 0', color: 'var(--text-2)', fontSize: 14, lineHeight: 1.5 }}>
+        <p style={{ margin: 0, color: 'var(--text-2)', fontSize: 14, lineHeight: 1.5 }}>
           <b style={{ color: 'var(--amber)' }}>Hipótese central:</b> quando o budget sobe demais
           de um dia pro outro, o algoritmo do Google entra em fase de re-aprendizado,
           não consegue otimizar leilões e o ROAS resultante cai. <b>Contexto:</b> medimos

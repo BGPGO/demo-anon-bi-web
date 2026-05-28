@@ -400,39 +400,19 @@ const PageCampanhaEstado = () => {
 
   return (
     <div className="page bi-dashboard-theme" style={{ padding: '20px 28px 40px' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Campanha × Estado × Marca</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
-          {k.ref_start} → {k.ref_end} · 12m
-        </span>
-      </div>
-
-      {/* Titulo */}
-      <div style={{ marginBottom: 18 }}>
-        <h1 style={{
-          fontSize: '1.6rem', fontWeight: 900, lineHeight: 1.1, marginBottom: 6,
-          background: 'linear-gradient(135deg, #4fc3f7, #81d4fa)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-        }}>
-          Cruzamento Ads × Estado × Marca
-        </h1>
-        <p style={{ fontSize: 12.5, color: 'var(--text-2)', maxWidth: 980, lineHeight: 1.6 }}>
-          Performance de mídia paga cruzada com geografia e marca: <b>onde</b> o real investido
-          em Ads gera receita de 1ª compra mais alta, <b>qual marca</b> performa em cada UF e
-          como o <b>ROAS evolui mês a mês</b>. Cores: verde &gt; 3x, amarelo 1–3x, vermelho &lt; 1x.
-        </p>
-      </div>
+      <PageHeader
+        title="Cruzamento Ads × Estado × Marca"
+        subtitle={<>Mídia paga cruzada com geografia e marca · <b>onde</b> o Ads gera 1ª compra · ROAS mês a mês (verde &gt; 3x, amarelo 1–3x, vermelho &lt; 1x)</>}
+        breadcrumb={["Demo BI", "Campanha × Estado × Marca"]}
+        actions={
+          <span style={{ fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
+            {k.ref_start} → {k.ref_end} · 12m
+          </span>
+        }
+      />
 
       {/* Filtros */}
-      <div style={{
-        display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap',
-        padding: '10px 14px', marginBottom: 18, background: 'rgba(255,255,255,0.025)',
-        border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8,
-      }}>
-        <span style={{ fontSize: 11, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 1 }}>Filtros:</span>
+      <div className="filters-bar" style={{ gap: 12, marginBottom: 18 }}>
         <select value={mesSel} onChange={(e) => setMesSel(e.target.value)}
           style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 4, color: 'var(--text)', fontSize: 12, padding: '4px 8px' }}>
           {mesOptions.map(m => <option key={m} value={m}>{m === 'Todos' ? 'Todos os meses' : _ceMonth(m)}</option>)}

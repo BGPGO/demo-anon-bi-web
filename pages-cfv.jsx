@@ -87,12 +87,11 @@ const PageCFV = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      {/* === Breadcrumb === */}
-      <div className="breadcrumb" style={{ marginBottom: 18, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>CFV — Custo Financeiro de Venda</b>
-      </div>
+      <PageHeader
+        title="CFV — Custo Financeiro de Venda"
+        subtitle="Taxas por canal de pagamento · decomposição fixa / variável / descontos"
+        breadcrumb={["Demo BI", "CFV"]}
+      />
 
       {/* === Storytelling === */}
       <div style={{

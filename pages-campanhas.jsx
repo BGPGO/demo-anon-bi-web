@@ -434,40 +434,19 @@ const PageCampanhasAds = () => {
 
   return (
     <div className="page bi-dashboard-theme" style={{ padding: '20px 28px 40px' }}>
-      {/* === Breadcrumb === */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Campanhas × Vendas</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
-          {k.ref_start} → {k.ref_end} · {k.meses_periodo}m
-        </span>
-      </div>
-
-      {/* === Storytelling de abertura === */}
-      <div style={{ marginBottom: 22 }}>
-        <h1 style={{
-          fontSize: '1.8rem', fontWeight: 900, lineHeight: 1.1, marginBottom: 6,
-          background: 'linear-gradient(135deg, #4fc3f7, #81d4fa)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-        }}>
-          O aumento de Ads gera novos clientes?
-        </h1>
-        <p style={{ fontSize: 13, color: 'var(--text-2)', maxWidth: 920, lineHeight: 1.6 }}>
-          Análise de <b>primeira compra</b>: o teste é se cada real investido em Google Ads converte em
-          aquisição. O <b>foco é o cliente novo</b>, não a receita total — recompra é outro motor.
-          A <b>hipótese</b> testada por regressão linear e ANOVA é simples:
-          <i> existe relação estatística entre gasto diário em Ads e número de novos clientes adquiridos?</i>
-        </p>
-      </div>
+      <PageHeader
+        title="O aumento de Ads gera novos clientes?"
+        subtitle={<>Análise de <b>primeira compra</b> · regressão linear + ANOVA testando se cada real em Google Ads converte em aquisição (cliente novo, não receita total)</>}
+        breadcrumb={["Demo BI", "Campanhas × Vendas"]}
+        actions={
+          <span style={{ fontSize: 11, color: 'var(--mute)', fontFamily: 'var(--font-mono)' }}>
+            {k.ref_start} → {k.ref_end} · {k.meses_periodo}m
+          </span>
+        }
+      />
 
       {/* === Filtros === */}
-      <div style={{
-        display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap',
-        padding: '10px 14px', marginBottom: 18, background: 'rgba(255,255,255,0.025)',
-        border: '1px solid rgba(255,255,255,0.06)', borderRadius: 8,
-      }}>
-        <span style={{ fontSize: 11, color: 'var(--mute)', textTransform: 'uppercase', letterSpacing: 1 }}>Filtros:</span>
+      <div className="filters-bar" style={{ gap: 12, marginBottom: 18 }}>
         <div style={{ display: 'flex', gap: 4, background: 'rgba(0,0,0,0.2)', padding: 3, borderRadius: 6 }}>
           {['3m', '6m', '12m'].map(p => (
             <button key={p}

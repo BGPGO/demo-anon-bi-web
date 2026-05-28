@@ -23,12 +23,39 @@ const Icon = ({ name, ...props }) => {
     download: <><path d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></>,
     sliders: <><path d="M4 6h11M4 12h7M4 18h13"/><circle cx="18" cy="6" r="2"/><circle cx="14" cy="12" r="2"/><circle cx="20" cy="18" r="2"/></>,
     plus: <><path d="M12 5v14M5 12h14"/></>,
-    arrowUp: <><path d="M7 14l5-5 5 5"/></>,
-    arrowDown: <><path d="M7 10l5 5 5-5"/></>,
+    arrowUp: <><path d="M12 19V5M5 12l7-7 7 7"/></>,
+    arrowDown: <><path d="M12 5v14M19 12l-7 7-7-7"/></>,
     calendar: <><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></>,
     cash: <><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></>,
     accrual: <><path d="M4 4h12l4 4v12H4z"/><path d="M4 12h16M12 4v16"/></>,
     filter: <><path d="M3 5h18l-7 9v6l-4-2v-4z"/></>,
+    sun: <><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></>,
+    moon: <><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></>,
+    // === Novos ícones únicos por tela ===
+    layers: <><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></>,
+    grid: <><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></>,
+    gridSm: <><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></>,
+    pie: <><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></>,
+    donut: <><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></>,
+    lineChart: <><path d="M3 3v18h18"/><path d="M7 14l4-4 4 4 5-5"/></>,
+    barChart: <><path d="M3 3v18h18"/><rect x="7" y="12" width="2" height="6"/><rect x="11" y="8" width="2" height="10"/><rect x="15" y="14" width="2" height="4"/><rect x="19" y="6" width="2" height="12"/></>,
+    trending: <><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></>,
+    package: <><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v9"/></>,
+    boxes: <><path d="M7 16.5L2 13V7l5-3 5 3v6l-5 3.5z"/><path d="M12 10l5-3 5 3v6l-5 3.5L12 16"/><path d="M7 16.5l5-3 5 3"/></>,
+    tagIcon: <><path d="M20 12l-8 8a2 2 0 0 1-2.83 0L2 12.83V3h9.83L20 11.17a2 2 0 0 1 0 2.83z"/><circle cx="7.5" cy="7.5" r="1.5"/></>,
+    users: <><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><circle cx="17" cy="6" r="3"/><path d="M17 11a5 5 0 0 1 5 5"/></>,
+    mapPin: <><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></>,
+    shoppingCart: <><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l3 12h12l2-8H6"/></>,
+    truck: <><path d="M3 17V6h12v11M15 11h5l3 3v3h-8"/><circle cx="7" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></>,
+    repeat: <><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></>,
+    megaphone: <><path d="M3 11v3l13 5V6L3 11z"/><path d="M16 6v13"/><path d="M21 10v5"/></>,
+    zap: <><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></>,
+    clipboard: <><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="M9 11h6M9 15h4"/></>,
+    clock: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>,
+    rotate: <><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></>,
+    banknote: <><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v.01M18 14v.01"/></>,
+    coin: <><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9 9h4.5a1.5 1.5 0 0 1 0 3H10a1.5 1.5 0 0 0 0 3h5"/></>,
+    target: <><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></>,
   };
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" {...props}>
@@ -37,35 +64,98 @@ const Icon = ({ name, ...props }) => {
   );
 };
 
+// useCountUp — anima transição numérica suave (cubic ease-out). Mantém leve.
+const useCountUp = (target, duration = 900) => {
+  const [val, setVal] = React.useState(target);
+  const prev = React.useRef(target);
+  React.useEffect(() => {
+    if (typeof target !== "number" || !isFinite(target)) { setVal(target); return; }
+    const from = prev.current || 0;
+    const to = target;
+    if (from === to) return;
+    let raf;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setVal(from + (to - from) * eased);
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else prev.current = to;
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, duration]);
+  return val;
+};
+
 const ASTRO_LEGACY_BASE = "https://demo-anon.187.77.238.125.sslip.io";
+// Tintas suaves nos icones do menu (so quando inativos — ativo deixa o CSS pintar de cyan)
+const ICON_TINTS = {
+  // existentes
+  home:         'rgba(34,211,238,0.55)',   // cyan
+  chart:        'rgba(34,211,238,0.55)',   // cyan
+  money:        'rgba(245,158,11,0.55)',   // âmbar
+  expense:      'rgba(245,158,11,0.55)',   // âmbar
+  invest:       'rgba(167,139,250,0.55)',  // violeta
+  report:       'rgba(16,185,129,0.55)',   // verde
+  user:         'rgba(244,114,182,0.55)',  // rosa
+  sun:          'rgba(245,158,11,0.55)',   // âmbar
+  moon:         'rgba(196,181,253,0.55)',  // lavanda
+  // novos — distribuídos pra que vizinhos no menu não repitam tinta
+  banknote:     'rgba(245,158,11,0.55)',   // âmbar
+  calendar:     'rgba(167,139,250,0.55)',  // violeta
+  coin:         'rgba(245,158,11,0.55)',   // âmbar
+  layers:       'rgba(167,139,250,0.55)',  // violeta
+  mapPin:       'rgba(244,114,182,0.55)',  // rosa
+  lineChart:    'rgba(45,212,191,0.55)',   // teal
+  pie:          'rgba(251,113,133,0.55)',  // coral
+  clock:        'rgba(196,181,253,0.55)',  // lavanda
+  package:      'rgba(245,158,11,0.55)',   // âmbar
+  tagIcon:      'rgba(244,114,182,0.55)',  // rosa
+  barChart:     'rgba(45,212,191,0.55)',   // teal
+  donut:        'rgba(167,139,250,0.55)',  // violeta
+  grid:         'rgba(34,211,238,0.55)',   // cyan
+  clipboard:    'rgba(16,185,129,0.55)',   // verde
+  rotate:       'rgba(34,211,238,0.55)',   // cyan
+  truck:        'rgba(245,158,11,0.55)',   // âmbar
+  shoppingCart: 'rgba(16,185,129,0.55)',   // verde
+  repeat:       'rgba(251,113,133,0.55)',  // coral
+  megaphone:    'rgba(244,114,182,0.55)',  // rosa
+  zap:          'rgba(245,158,11,0.55)',   // âmbar
+  trending:     'rgba(16,185,129,0.55)',   // verde
+  target:       'rgba(251,113,133,0.55)',  // coral
+  users:        'rgba(244,114,182,0.55)',  // rosa
+  boxes:        'rgba(167,139,250,0.55)',  // violeta
+  gridSm:       'rgba(34,211,238,0.55)',   // cyan
+};
 const Sidebar = ({ active, onSelect, open }) => {
   // === Power BI — telas na ORDEM do PDF original (17 telas, 3 ainda EM BREVE) ===
   const general = [
-    { id: "astro_dash",              icon: "home",    label: "01 · Dash" },
-    { id: "astro_dashfatur",         icon: "chart",   label: "02 · Dash · Faturamento" },
-    { id: "pbi_vendas_dia_util",     icon: "chart",   label: "03 · Vendas / Dia Útil" },
-    { id: "pbi_cfv",                 icon: "money",   label: "04 · CFV" },
-    { id: "pbi_geral",               icon: "invest",  label: "05 · Geral" },
-    { id: "pbi_campest",             icon: "invest",  label: "07 · Campanha × Estado" },
-    { id: "pbi_analise_vendas",      icon: "money",   label: "09 · Análise de Vendas" },
-    { id: "pbi_tend_composicao",     icon: "chart",   label: "10 · Tendência Composição" },
-    { id: "pbi_tend_temporais",      icon: "chart",   label: "11 · Tendência Temporal" },
-    { id: "pbi_tend_produtos",       icon: "chart",   label: "12 · Tendência Produtos" },
-    { id: "pbi_tend_marcas",         icon: "chart",   label: "13 · Tendências Marcas" },
-    { id: "pbi_composicao_vendas",   icon: "chart",   label: "14 · Composição de Venda" },
-    { id: "pbi_composicao_total",    icon: "chart",   label: "15 · Composição (Total)" },
-    { id: "pbi_coorte",              icon: "chart",   label: "16-17 · Cohort (Valor + Vendas)" },
+    { id: "astro_dash",              icon: "home",       label: "Dash" },
+    { id: "astro_dashfatur",         icon: "banknote",   label: "Dash · Faturamento" },
+    { id: "pbi_vendas_dia_util",     icon: "calendar",   label: "Vendas / Dia Útil" },
+    { id: "pbi_cfv",                 icon: "coin",       label: "CFV" },
+    { id: "pbi_geral",               icon: "layers",     label: "Geral" },
+    { id: "pbi_campest",             icon: "mapPin",     label: "Campanha × Estado" },
+    { id: "pbi_analise_vendas",      icon: "lineChart",  label: "Análise de Vendas" },
+    { id: "pbi_tend_composicao",     icon: "pie",        label: "Tendência Composição" },
+    { id: "pbi_tend_temporais",      icon: "clock",      label: "Tendência Temporal" },
+    { id: "pbi_tend_produtos",       icon: "package",    label: "Tendência Produtos" },
+    { id: "pbi_tend_marcas",         icon: "tagIcon",    label: "Tendências Marcas" },
+    { id: "pbi_composicao_vendas",   icon: "barChart",   label: "Composição de Venda" },
+    { id: "pbi_composicao_total",    icon: "donut",      label: "Composição (Total)" },
+    { id: "pbi_coorte",              icon: "grid",       label: "Cohort (Valor + Vendas)" },
   ];
   // === Outras Análises — todas migradas internamente (não mais links externos) ===
   const others = [
-    { id: "plano_acao", icon: "report", label: "Plano de Ação" },
-    { id: "astro_giro", icon: "chart", label: "Giro Estoque" },
-    { id: "astro_frete", icon: "expense", label: "Frete RJ" },
-    { id: "astro_pedmin", icon: "money", label: "Pedido Mínimo" },
-    { id: "astro_recompra", icon: "user", label: "Recompra" },
-    { id: "astro_campanhas", icon: "invest", label: "Campanhas Ads" },
-    { id: "astro_agressividade", icon: "chart", label: "Agressividade" },
-    { id: "astro_abc", icon: "chart", label: "Curva ABC" },
+    { id: "plano_acao",          icon: "clipboard",    label: "Plano de Ação" },
+    { id: "astro_giro",          icon: "rotate",       label: "Giro Estoque" },
+    { id: "astro_frete",         icon: "truck",        label: "Frete RJ" },
+    { id: "astro_pedmin",        icon: "shoppingCart", label: "Pedido Mínimo" },
+    { id: "astro_recompra",      icon: "repeat",       label: "Recompra" },
+    { id: "astro_campanhas",     icon: "megaphone",    label: "Campanhas Ads" },
+    { id: "astro_agressividade", icon: "zap",          label: "Agressividade" },
+    { id: "astro_abc",           icon: "trending",     label: "Curva ABC" },
   ];
   // Modo da page (active/upsell/hidden) injetado pelo build-jsx.cjs a partir do bi.config.js
   const pageMode = (id) => (window.BI_PAGE_MODE && window.BI_PAGE_MODE[id]) || 'active';
@@ -86,7 +176,7 @@ const Sidebar = ({ active, onSelect, open }) => {
           className="sb-item"
           title={"Abrir em " + it.href}
         >
-          <Icon name={it.icon} />
+          <Icon name={it.icon} style={ICON_TINTS[it.icon] ? { color: ICON_TINTS[it.icon] } : undefined} />
           <span className="label">{it.label}</span>
           <span className="badge" style={{ background: "transparent", border: "1px solid var(--border-2)", fontSize: 9, padding: "1px 5px", color: "var(--mute-2)" }}>↗</span>
         </a>
@@ -101,7 +191,7 @@ const Sidebar = ({ active, onSelect, open }) => {
         style={it.badge ? { opacity: 0.45, cursor: "default" } : {}}
         title={upsell ? "Funcionalidade PRO — clique pra ver detalhes" : it.label}
       >
-        <Icon name={it.icon} />
+        <Icon name={it.icon} style={(active !== it.id && ICON_TINTS[it.icon]) ? { color: ICON_TINTS[it.icon] } : undefined} />
         <span className="label">{it.label}</span>
         {upsell && <span className="sb-item-badge-pro">PRO</span>}
         {it.badge && <span className="badge">{it.badge}</span>}
@@ -213,22 +303,22 @@ const MonthSelect = ({ value, onChange }) => (
 
 // BiExportButton: modal com checkboxes pra exportar telas selecionadas como PDF
 const BI_EXPORT_PAGES = [
-  { id: "overview", label: "01 Visão Geral" },
-  { id: "receita", label: "02 Receita" },
-  { id: "despesa", label: "03 Despesa" },
-  { id: "fluxo", label: "04 Fluxo de Caixa" },
-  { id: "tesouraria", label: "05 Tesouraria" },
-  { id: "comparativo", label: "06 Comparativo" },
-  { id: "relatorio", label: "07 Relatório IA" },
-  { id: "valuation", label: "08 Valuation" },
-  { id: "indicators", label: "09 Indicadores" },
-  { id: "faturamento_produto", label: "10 Faturamento por Produto" },
-  { id: "curva_abc", label: "11 Curva ABC" },
-  { id: "marketing", label: "12 Marketing ADS" },
-  { id: "hierarquia", label: "13 Hierarquia ADS" },
-  { id: "detalhado", label: "14 Detalhado" },
-  { id: "profunda_cliente", label: "15 Profunda Cliente" },
-  { id: "crm", label: "16 CRM" },
+  { id: "overview", label: "Visão Geral" },
+  { id: "receita", label: "Receita" },
+  { id: "despesa", label: "Despesa" },
+  { id: "fluxo", label: "Fluxo de Caixa" },
+  { id: "tesouraria", label: "Tesouraria" },
+  { id: "comparativo", label: "Comparativo" },
+  { id: "relatorio", label: "Relatório IA" },
+  { id: "valuation", label: "Valuation" },
+  { id: "indicators", label: "Indicadores" },
+  { id: "faturamento_produto", label: "Faturamento por Produto" },
+  { id: "curva_abc", label: "Curva ABC" },
+  { id: "marketing", label: "Marketing ADS" },
+  { id: "hierarquia", label: "Hierarquia ADS" },
+  { id: "detalhado", label: "Detalhado" },
+  { id: "profunda_cliente", label: "Profunda Cliente" },
+  { id: "crm", label: "CRM" },
 ];
 
 const BiExportButton = () => {
@@ -292,6 +382,15 @@ const BiExportButton = () => {
 
 // Header: breadcrumb + YearSelect + MonthSelect + StatusFilter
 const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, setYear, month, setMonth }) => {
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('bi.theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'); }
+    catch { return 'dark'; }
+  });
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('bi.theme', theme); } catch {}
+  }, [theme]);
+  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
   return (
     <header className="header">
       <button className="hd-icon-btn hd-menu-btn" title="Menu" onClick={onToggleSidebar}><Icon name="menu" /></button>
@@ -307,6 +406,9 @@ const Header = ({ page, onToggleSidebar, statusFilter, setStatusFilter, year, se
       {setMonth && <MonthSelect value={month} onChange={setMonth} />}
       {setStatusFilter && <StatusFilterSeg value={statusFilter} onChange={setStatusFilter} />}
       <BiExportButton />
+      <button className="theme-toggle" onClick={toggleTheme} title={theme === 'dark' ? 'Modo claro' : 'Modo escuro'}>
+        <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
+      </button>
     </header>
   );
 };
@@ -719,8 +821,8 @@ const KpiTile = ({ label, value, unit, deltaPct, deltaDir, sparkValues, sparkCol
           {unit && <span className="unit">{unit}</span>}
         </div>
         {deltaPct != null && (
-          <div className={`kpi-delta ${deltaDir}`}>
-            <Icon name={deltaDir === "up" ? "arrowUp" : "arrowDown"} style={{ width: 12, height: 12 }} />
+          <div className={["kpi-delta", deltaDir, Math.abs(deltaPct) > 20 ? "strong" : ""].filter(Boolean).join(" ")}>
+            <Icon name={deltaDir === "up" ? "arrowUp" : "arrowDown"} style={{ width: 13, height: 13 }} />
             {Math.abs(deltaPct).toFixed(1).replace(".", ",")}%
           </div>
         )}
@@ -730,6 +832,28 @@ const KpiTile = ({ label, value, unit, deltaPct, deltaDir, sparkValues, sparkCol
           <Spark values={sparkValues} color={sparkColor || "var(--cyan)"} />
         </div>
       )}
+    </div>
+  );
+};
+
+// PageHeader — header padronizado pra todas as pages (breadcrumb + title + subtitle + actions)
+const PageHeader = ({ title, subtitle, breadcrumb, actions }) => {
+  const crumbs = breadcrumb || ["Demo XYZ", title];
+  return (
+    <div className="page-title">
+      <div className="ph-info">
+        <div className="crumbs">
+          {crumbs.map((c, i) => (
+            <React.Fragment key={i}>
+              {i > 0 && <span className="sep">›</span>}
+              <span className={i === crumbs.length - 1 ? "current" : ""}>{c}</span>
+            </React.Fragment>
+          ))}
+        </div>
+        <h1>{title}</h1>
+        {subtitle && <div className="subtitle">{subtitle}</div>}
+      </div>
+      {actions && <div className="actions">{actions}</div>}
     </div>
   );
 };
@@ -980,7 +1104,8 @@ function applyDrilldown(extrato, dd) {
 Object.assign(window, {
   Icon, Sidebar, Header, Filters, FiltersDrawer, InlineFilterBar, ExportButton, DEFAULT_FILTERS,
   MonthlyBars, SingleBars, DailyBars, StackedArea, TrendChart, MultiLine,
-  BarList, BarListLine, BarListLegend, DivergingBars, Donut, Spark, KpiTile,
+  BarList, BarListLine, BarListLegend, DivergingBars, Donut, Spark, KpiTile, PageHeader,
   PAGE_TITLES, StatusFilterSeg, STATUS_FILTERS,
   DrilldownBadge, applyDrilldown, extratoMonthKey,
+  useCountUp,
 });

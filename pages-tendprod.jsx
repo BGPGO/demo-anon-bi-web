@@ -182,13 +182,11 @@ const PageTendenciaProdutos = () => {
 
   // ===== UI =====
   return (
-    <div className="page" style={{ padding: '20px 28px 40px', maxWidth: 1500, margin: '0 auto' }}>
-      {/* Breadcrumb */}
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Tendência Produtos · YTD vs PYTD</b>
-      </div>
+    <div className="page">
+      <PageHeader
+        title="Tendência Produtos"
+        subtitle={`YTD ${m.ref_year} vs PYTD ${m.prev_year} · regressão linear + log-linear sobre 12m`}
+      />
 
       {/* Hero */}
       <div style={{

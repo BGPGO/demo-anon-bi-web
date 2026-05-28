@@ -23,14 +23,11 @@ const PageFluxo = ({ filters, setFilters, onOpenFilters, statusFilter, drilldown
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Fluxo de Caixa</h1>
-          <div className="status-line">Análise horizontal/vertical e saldos por mês</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Fluxo de Caixa"
+        subtitle="Análise horizontal/vertical e saldos por mês"
+        breadcrumb={["Demo XYZ", "Fluxo de Caixa"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
@@ -372,14 +369,11 @@ const PageTesouraria = ({ filters, setFilters, onOpenFilters, statusFilter, dril
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Tesouraria</h1>
-          <div className="status-line"><span className="live-dot" /> Saldos e pulso · {(B.META && B.META.ref_year) || "—"}</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Tesouraria"
+        subtitle={<><span className="live-dot" /> Saldos e pulso · {(B.META && B.META.ref_year) || "—"}</>}
+        breadcrumb={["Demo XYZ", "Tesouraria"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown(null)} />
 
@@ -742,14 +736,11 @@ const PageComparativo = ({ statusFilter, drilldown, setDrilldown, year, month })
 
   return (
     <div className="page">
-      <div className="page-title">
-        <div>
-          <h1>Comparativo</h1>
-          <div className="status-line">{periodLabel(p1)} vs {periodLabel(p2)}</div>
-        </div>
-        <div className="actions">
-        </div>
-      </div>
+      <PageHeader
+        title="Comparativo"
+        subtitle={`${periodLabel(p1)} vs ${periodLabel(p2)}`}
+        breadcrumb={["Demo XYZ", "Comparativo"]}
+      />
 
       <DrilldownBadge drilldown={drilldown} onClear={() => setDrilldown && setDrilldown(null)} />
 
@@ -995,10 +986,12 @@ const PageRelatorio = ({ year, statusFilter }) => {
   if (loading) {
     return (
       <div className="page">
-        <div className="page-title">
-          <div><h1>Relatório IA</h1><div className="status-line">Carregando…</div></div>
-          <div className="actions">{PeriodToolbar}</div>
-        </div>
+        <PageHeader
+          title="Relatório IA"
+          subtitle="Carregando…"
+          breadcrumb={["Demo XYZ", "Relatório IA"]}
+          actions={PeriodToolbar}
+        />
       </div>
     );
   }
@@ -1006,13 +999,12 @@ const PageRelatorio = ({ year, statusFilter }) => {
   if (generating) {
     return (
       <div className="page">
-        <div className="page-title">
-          <div>
-            <h1>Relatório IA</h1>
-            <div className="status-line">Gerando relatório com IA…</div>
-          </div>
-          <div className="actions">{PeriodToolbar}</div>
-        </div>
+        <PageHeader
+          title="Relatório IA"
+          subtitle="Gerando relatório com IA…"
+          breadcrumb={["Demo XYZ", "Relatório IA"]}
+          actions={PeriodToolbar}
+        />
         <div className="card" style={{ textAlign: 'center', padding: 40 }}>
           <div style={{ fontSize: 48, marginBottom: 16 }}>⚙️</div>
           <h2 className="card-title" style={{ textAlign: 'center' }}>Gerando análise…</h2>
@@ -1039,13 +1031,12 @@ const PageRelatorio = ({ year, statusFilter }) => {
       : (periodYear === refYear ? `node generate-report.cjs --force` : `node generate-report.cjs --force --year=${periodYear}`);
     return (
       <div className="page">
-        <div className="page-title">
-          <div>
-            <h1>Relatório IA</h1>
-            <div className="status-line">Relatório de {monthLabel}{periodYear} ainda não foi gerado</div>
-          </div>
-          <div className="actions">{PeriodToolbar}</div>
-        </div>
+        <PageHeader
+          title="Relatório IA"
+          subtitle={`Relatório de ${monthLabel}${periodYear} ainda não foi gerado`}
+          breadcrumb={["Demo XYZ", "Relatório IA"]}
+          actions={PeriodToolbar}
+        />
         <div className="card">
           <h2 className="card-title">Gerar agora</h2>
           <p style={{ color: "var(--fg-2)", lineHeight: 1.6, marginTop: 12 }}>

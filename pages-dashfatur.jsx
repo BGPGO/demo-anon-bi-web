@@ -19,10 +19,8 @@
 // Adapta o padrao AstroBarV pra renderizar N series side-by-side por slot.
 // ===========================================================================
 const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt }) => {
-  // groups: array de labels do eixo X (ex: ['Jan','Fev',...])
-  // series: { name, values:[per group] }
-  // labels: legenda das series (mesma ordem)
-  // colors: array de cores hex
+  // Layout CSS flex: cada grupo ocupa flex:1 do container (preenche 100% horizontal);
+  // barras dentro de cada grupo têm width fixa (não esticam).
   if (!groups || !groups.length || !series || !series.length) {
     return <div className="empty">sem dados</div>;
   }
@@ -33,17 +31,14 @@ const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt })
   if (max === 0) max = 1;
   const N = groups.length;
   const S = series.length;
-  const padT = 24, padB = 36, padL = 12, padR = 12;
-  const groupSlot = N <= 6 ? 110 : (N <= 12 ? 78 : 60);
-  const barW = Math.max(8, (groupSlot * 0.78) / S);
-  const W = Math.max(320, padL + padR + N * groupSlot);
-  const H = height;
-  const innerH = H - padT - padB;
+  const barW = N <= 6 ? 22 : (N <= 12 ? 16 : 12);
+  const labelH = 26;
+  const plotH = height - labelH;
 
   return (
     <div style={{ width: '100%' }}>
       {/* Legenda */}
-      <div style={{ display: 'flex', gap: 14, marginBottom: 6, flexWrap: 'wrap', fontSize: 11 }}>
+      <div style={{ display: 'flex', gap: 14, marginBottom: 10, flexWrap: 'wrap', fontSize: 11 }}>
         {labels.map((lab, i) => (
           <span key={i} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, color: 'var(--text-2)' }}>
             <span style={{ width: 10, height: 10, background: palette[i % palette.length], borderRadius: 2 }} />
@@ -51,37 +46,54 @@ const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt })
           </span>
         ))}
       </div>
-      <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-        <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: 'block' }}>
-          <line x1={padL} y1={H - padB + 0.5} x2={W - padR} y2={H - padB + 0.5}
-                stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
-          {groups.map((g, gi) => {
-            const slotStart = padL + groupSlot * gi;
-            const groupCenter = slotStart + groupSlot / 2;
-            const groupInnerW = barW * S + (S - 1) * 3;
-            const firstX = groupCenter - groupInnerW / 2;
-            return (
-              <g key={gi}>
+      <div style={{ width: '100%', position: 'relative', height }}>
+        {/* baseline */}
+        <div style={{
+          position: 'absolute', left: 0, right: 0, bottom: labelH,
+          height: 1, background: 'rgba(255,255,255,0.08)',
+        }} />
+        <div style={{
+          display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+          width: '100%', height: plotH, gap: 4,
+        }}>
+          {groups.map((g, gi) => (
+            <div key={gi} style={{
+              flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column',
+              alignItems: 'center', justifyContent: 'flex-end', height: '100%',
+            }}>
+              <div style={{
+                display: 'flex', alignItems: 'flex-end', gap: 3,
+                height: '100%', justifyContent: 'center',
+              }}>
                 {series.map((s, si) => {
                   const v = s.values[gi] || 0;
-                  const h = (v / max) * innerH;
-                  const x = firstX + si * (barW + 3);
-                  const y = padT + (innerH - h);
+                  const h = Math.max(2, (v / max) * plotH);
                   return (
-                    <rect key={si} x={x} y={y} width={barW} height={Math.max(2, h)}
-                          rx="2" fill={palette[si % palette.length]} opacity={0.92}>
-                      <title>{`${s.name} · ${g}: ${fmtFn(v)}`}</title>
-                    </rect>
+                    <div key={si}
+                         title={`${s.name} · ${g}: ${fmtFn(v)}`}
+                         style={{
+                           width: barW, height: h, background: palette[si % palette.length],
+                           opacity: 0.92, borderRadius: '3px 3px 0 0',
+                           transition: 'height 240ms cubic-bezier(.2,.7,.2,1)',
+                         }} />
                   );
                 })}
-                <text x={groupCenter} y={H - 14} textAnchor="middle"
-                      style={{ fontSize: 11, fill: '#94a3b8', fontFamily: 'var(--font-mono)' }}>
-                  {g}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{
+          display: 'flex', justifyContent: 'space-between',
+          width: '100%', height: labelH, gap: 4,
+        }}>
+          {groups.map((g, gi) => (
+            <div key={gi} style={{
+              flex: 1, minWidth: 0, textAlign: 'center',
+              fontSize: 11, color: '#94a3b8', fontFamily: 'var(--font-mono)',
+              paddingTop: 8,
+            }}>{g}</div>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -324,27 +336,21 @@ const PageDashFaturamento = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Dash · Faturamento</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
-          {hasFilter
-            ? (filtLoading ? 'recomputando…' : 'filtro reativo · DuckDB')
-            : 'snapshot pré-computado · sem filtro'}
-        </span>
-      </div>
-
-      <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 700 }}>Dash · Faturamento</h1>
-      <p style={{ margin: '0 0 14px', fontSize: 12, color: 'var(--mute)' }}>
-        Comparativo ano-vs-ano + evolução rolling 12 meses. YTD vs PYTD com corte no mês mais recente.
-      </p>
+      <PageHeader
+        title="Dash · Faturamento"
+        subtitle="Comparativo ano-vs-ano + evolução rolling 12m · YTD vs PYTD com corte no mês mais recente"
+        breadcrumb={["Demo BI", "Dash · Faturamento"]}
+        actions={
+          <span style={{ fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
+            {hasFilter
+              ? (filtLoading ? 'recomputando…' : 'filtro reativo · DuckDB')
+              : 'snapshot pré-computado · sem filtro'}
+          </span>
+        }
+      />
 
       {/* Filtros marca/categoria */}
-      <div style={{
-        display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end',
-        padding: '12px 0', marginBottom: 14, borderBottom: '1px solid var(--border)',
-      }}>
+      <div className="filters-bar" style={{ alignItems: 'flex-end', marginBottom: 14 }}>
         <MultiSelect label="Marca" options={opcoes.marcas || []} value={marca} onChange={setMarca} width={180} />
         <MultiSelect label="Categoria mãe" options={opcoes.categorias || []} value={categoria} onChange={setCategoria} width={180} />
         {hasFilter && (

@@ -43,55 +43,78 @@ const _fmtPct = (v, d = 1) => {
 // Renderiza SVG em tamanho NATIVO (W × H px) dentro de wrapper com scroll-x.
 // Sem preserveAspectRatio="none": rx="3" mantém cantos redondos, sem distorcer.
 const AstroBarV = ({ values, labels, color = 'cyan', height = 220, fmt = _fmtBRLk, onBarClick, activeIdx }) => {
+  // Layout CSS flex: cada slot ocupa flex:1 (preenche 100% horizontal),
+  // barra com width fixa dentro do slot (não estica).
   if (!values || !values.length) return <div className="empty">sem dados</div>;
   const max = Math.max(...values, 1);
   const palette = { cyan: '#22d3ee', green: '#10b981', amber: '#f59e0b', violet: '#a78bfa', red: '#ef4444' };
   const color1 = palette[color] || palette.cyan;
   const N = values.length;
-  const padT = 28, padB = 32, padL = 12, padR = 12;
-  // slot por barra: 80 (poucos), 60 (médio), 42 (muitos)
-  const barSlot = N <= 4 ? 90 : (N <= 8 ? 65 : (N <= 14 ? 50 : 42));
-  const W = Math.max(280, padL + padR + N * barSlot);
-  const H = height;
-  const innerH = H - padT - padB;
-  const barW = Math.min(54, barSlot * 0.62);
+  const barW = N <= 4 ? 48 : (N <= 8 ? 32 : (N <= 14 ? 22 : 16));
+  const valueH = 22;
+  const labelH = 26;
+  const plotH = height - valueH - labelH;
   const rotateLabel = N > 8 || labels.some((l) => String(l).length > 5);
+
   return (
-    <div style={{ width: '100%', overflowX: 'auto', overflowY: 'hidden' }}>
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: 'block' }}>
-        {/* baseline */}
-        <line x1={padL} y1={H - padB + 0.5} x2={W - padR} y2={H - padB + 0.5}
-              stroke="rgba(255,255,255,0.08)" strokeWidth="1" />
+    <div style={{ width: '100%', position: 'relative', height }}>
+      {/* baseline */}
+      <div style={{
+        position: 'absolute', left: 0, right: 0, bottom: labelH,
+        height: 1, background: 'rgba(255,255,255,0.08)',
+      }} />
+      <div style={{
+        display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+        width: '100%', height: valueH + plotH, gap: 4,
+      }}>
         {values.map((v, i) => {
-          const h = (v / max) * innerH;
-          const cx = padL + barSlot * (i + 0.5);
-          const x = cx - barW / 2;
-          const y = padT + (innerH - h);
+          const h = Math.max(2, (v / max) * plotH);
           const isActive = activeIdx === i;
-          const labelY = H - 12;
+          const opacity = isActive ? 1 : (activeIdx != null ? 0.4 : 0.92);
           return (
-            <g key={i} onClick={() => onBarClick && onBarClick(i, v, labels[i])} style={{ cursor: onBarClick ? 'pointer' : 'default' }}>
-              <rect
-                x={x} y={y} width={barW} height={Math.max(2, h)}
-                rx="3"
-                fill={color1}
-                opacity={isActive ? 1 : (activeIdx != null ? 0.4 : 0.92)}
-              >
-                <title>{`${labels[i]}: ${fmt(v)}`}</title>
-              </rect>
-              <text x={cx} y={y - 6} textAnchor="middle"
-                    style={{ fontSize: 11, fill: '#cbd5e1', fontFamily: 'JetBrains Mono, monospace', pointerEvents: 'none' }}>{fmt(v)}</text>
-              {rotateLabel ? (
-                <text x={cx} y={labelY} textAnchor="end" transform={`rotate(-35 ${cx} ${labelY})`}
-                      style={{ fontSize: 10, fill: '#94a3b8', pointerEvents: 'none' }}>{labels[i]}</text>
-              ) : (
-                <text x={cx} y={labelY} textAnchor="middle"
-                      style={{ fontSize: 11, fill: '#94a3b8', pointerEvents: 'none' }}>{labels[i]}</text>
-              )}
-            </g>
+            <div key={i}
+                 onClick={() => onBarClick && onBarClick(i, v, labels[i])}
+                 style={{
+                   flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column',
+                   alignItems: 'center', justifyContent: 'flex-end',
+                   height: '100%', cursor: onBarClick ? 'pointer' : 'default',
+                 }}>
+              <div style={{
+                fontSize: 11, color: '#cbd5e1',
+                fontFamily: 'JetBrains Mono, monospace',
+                marginBottom: 4, whiteSpace: 'nowrap',
+              }}>{fmt(v)}</div>
+              <div
+                title={`${labels[i]}: ${fmt(v)}`}
+                style={{
+                  width: barW, height: h, background: color1, opacity,
+                  borderRadius: '3px 3px 0 0',
+                  transition: 'height 240ms cubic-bezier(.2,.7,.2,1), opacity 160ms',
+                }} />
+            </div>
           );
         })}
-      </svg>
+      </div>
+      <div style={{
+        display: 'flex', justifyContent: 'space-between',
+        width: '100%', height: labelH, gap: 4,
+      }}>
+        {labels.map((lab, i) => (
+          <div key={i} style={{
+            flex: 1, minWidth: 0,
+            display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+            paddingTop: 8,
+            fontSize: rotateLabel ? 10 : 11, color: '#94a3b8',
+            transform: rotateLabel ? 'translateY(2px)' : 'none',
+          }}>
+            <span style={{
+              transform: rotateLabel ? 'rotate(-35deg)' : 'none',
+              transformOrigin: 'top center',
+              whiteSpace: 'nowrap',
+            }}>{lab}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -101,7 +124,19 @@ const AstroLine = ({ values, labels, color = 'var(--cyan)', height = 200, fmt = 
   if (!values || !values.length) return <div className="empty">sem dados</div>;
   const [hover, setHover] = useState(null);
   const wrapRef = React.useRef(null);
-  const W = 600, H = height;
+  // Mede largura real do container pra viewBox match com pixels (sem esticar com preserveAspectRatio="none")
+  const [W, setW] = React.useState(800);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const H = height;
   const padT = 18, padB = 22, padL = 52, padR = 12;  // padL maior pra labels eixo Y
   const max = Math.max(...values), min = Math.min(...values);
   const range = max - min || 1;
@@ -137,7 +172,7 @@ const AstroLine = ({ values, labels, color = 'var(--cyan)', height = 200, fmt = 
   return (
     <div ref={wrapRef} style={{ position: 'relative', width: '100%' }}
          onMouseLeave={() => setHover(null)}>
-      <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none"
+      <svg viewBox={`0 0 ${W} ${H}`}
            style={{ width: '100%', height, display: 'block' }}
            onMouseMove={onMove}>
         <defs>
@@ -598,13 +633,7 @@ const FilterBarAstro = ({ filters, setF }) => {
   const anoMesOpts = opts.ano_mes.slice(0, 36);
 
   return (
-    <div style={{
-      background: 'rgba(13,18,22,0.7)',
-      borderBottom: '1px solid var(--border)',
-      padding: '12px 0', marginBottom: 16,
-      position: 'relative', zIndex: 30,
-    }}>
-      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+    <div className="filters-bar" style={{ alignItems: 'flex-end', position: 'relative', zIndex: 30 }}>
         {/* Filtro temporal vem do Header global (year/month) — não duplicar aqui */}
         <SegToggle label="Dia útil" value={filters.diaUtil}
                     options={[{ value: 'all', label: 'Todos' }, { value: 'util', label: 'Útil' }, { value: 'fds', label: 'FDS' }]}
@@ -619,7 +648,6 @@ const FilterBarAstro = ({ filters, setF }) => {
         <SegToggle label="Pessoa" value={filters.pessoa}
                     options={[{ value: 'all', label: 'Todos' }, { value: 'F', label: 'PF' }, { value: 'J', label: 'PJ' }]}
                     onChange={(v) => setF({ pessoa: v })} />
-      </div>
     </div>
   );
 };
@@ -711,22 +739,22 @@ const KpiBlock = ({ where }) => {
         <div className="kpi-tile cyan">
           <div className="kpi-label">Valor Bruto</div>
           <div className="kpi-value"><span className="currency">R$</span>{sk(_fmtBRLk(valor_bruto).replace('R$ ', ''))}</div>
-          <div className="kpi-hint">Σ valor_rateado · {_fmtNum(n_vendas)} pedidos</div>
+          <div className="kpi-hint"><span className="kpi-formula">Σ valor_rateado</span><span className="kpi-count">{_fmtNum(n_vendas)}</span> pedidos</div>
         </div>
         <div className="kpi-tile green">
           <div className="kpi-label">Resultado Bruto</div>
           <div className="kpi-value"><span className="currency">R$</span>{sk(_fmtBRLk(resultado_bruto).replace('R$ ', ''))}</div>
-          <div className="kpi-hint">bruto − CMV</div>
+          <div className="kpi-hint"><span className="kpi-formula">bruto − CMV</span></div>
         </div>
         <div className="kpi-tile amber">
           <div className="kpi-label">CMV</div>
           <div className="kpi-value"><span className="currency">R$</span>{sk(_fmtBRLk(cmv).replace('R$ ', ''))}</div>
-          <div className="kpi-hint">preco_custo × qtd · est</div>
+          <div className="kpi-hint"><span className="kpi-formula">preço_custo × qtd</span>· est</div>
         </div>
         <div className="kpi-tile cyan">
           <div className="kpi-label">Valor Líquido</div>
           <div className="kpi-value"><span className="currency">R$</span>{sk(_fmtBRLk(valor_liquido).replace('R$ ', ''))}</div>
-          <div className="kpi-hint">bruto − CFV − CMV</div>
+          <div className="kpi-hint"><span className="kpi-formula">bruto − CFV − CMV</span></div>
         </div>
       </div>
 
@@ -734,22 +762,22 @@ const KpiBlock = ({ where }) => {
         <div className="card kpi-mini">
           <div className="kpi-label">Total Vendas</div>
           <div className="kpi-value">{sk(_fmtNum(n_vendas))}</div>
-          <div className="kpi-hint">{r.dias_uteis || 0} dias úteis</div>
+          <div className="kpi-hint"><span className="kpi-count">{r.dias_uteis || 0}</span> dias úteis</div>
         </div>
         <div className="card kpi-mini">
           <div className="kpi-label">Venda/dia útil</div>
           <div className="kpi-value">{sk(_fmtBRLk(venda_dia_util))}</div>
-          <div className="kpi-hint">bruto útil ÷ dias</div>
+          <div className="kpi-hint"><span className="kpi-formula">bruto útil ÷ dias</span></div>
         </div>
         <div className="card kpi-mini">
           <div className="kpi-label">Ticket Médio</div>
           <div className="kpi-value">{sk(_fmtBRL(ticket))}</div>
-          <div className="kpi-hint">bruto ÷ pedidos</div>
+          <div className="kpi-hint"><span className="kpi-formula">bruto ÷ pedidos</span></div>
         </div>
         <div className="card kpi-mini">
           <div className="kpi-label">Margem Bruta %</div>
           <div className="kpi-value">{sk(_fmtPct(margem_bruta_pct))}</div>
-          <div className="kpi-hint">1 − CMV/Vendas · est</div>
+          <div className="kpi-hint"><span className="kpi-formula">1 − CMV/Vendas</span>· est</div>
         </div>
         <div className="card kpi-mini">
           <div className="kpi-label">CFV %</div>
@@ -759,7 +787,7 @@ const KpiBlock = ({ where }) => {
         <div className="card kpi-mini">
           <div className="kpi-label">Margem Líquida %</div>
           <div className="kpi-value">{sk(_fmtPct(margem_liq_pct))}</div>
-          <div className="kpi-hint">líquido ÷ bruto</div>
+          <div className="kpi-hint"><span className="kpi-formula">líquido ÷ bruto</span></div>
         </div>
       </div>
     </>
@@ -1362,19 +1390,16 @@ const PageAstroDash = () => {
 
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 14, display: 'flex', alignItems: 'center', gap: 8 }}>
-        <span>Demo BI</span>
-        <span style={{ color: 'var(--mute)' }}>›</span>
-        <b>Dashboard</b>
-        <span style={{ marginLeft: 'auto', fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
-          {status.ready ? `DuckDB ready${status.bootMs ? ` (${status.bootMs}ms)` : ''}` : 'Carregando 3.8MB parquet...'}
-        </span>
-      </div>
-
-      <h1 style={{ margin: '0 0 4px', fontSize: 24, fontWeight: 700 }}>Dashboard · Distribuidora XYZ</h1>
-      <p style={{ margin: '0 0 14px', fontSize: 12, color: 'var(--mute)' }}>
-        Réplica reativa do BI Power BI. Filtros + clique em barras cross-filtra tudo. Drill-down completo em hierarquia produto.
-      </p>
+      <PageHeader
+        title="Dashboard · Distribuidora XYZ"
+        subtitle={<>Réplica reativa do BI Power BI · cross-filtra tudo · drill-down completo em hierarquia de produto</>}
+        breadcrumb={["Demo BI", "Dashboard"]}
+        actions={
+          <span style={{ fontSize: 11, color: status.ready ? 'var(--green-2)' : 'var(--mute)' }}>
+            {status.ready ? `DuckDB ready${status.bootMs ? ` (${status.bootMs}ms)` : ''}` : 'Carregando 3.8MB parquet...'}
+          </span>
+        }
+      />
 
       <FilterBarAstro filters={filters} setF={setF} />
       <ActiveChips filters={filters} setF={setF} />
@@ -1431,8 +1456,11 @@ const PagePlanoAcao = () => {
   if (!data) return <div className="page"><div className="empty">carregando plano...</div></div>;
   return (
     <div className="page" style={{ padding: '20px 28px 40px' }}>
-      <div className="breadcrumb" style={{ marginBottom: 18 }}><span>Demo BI</span> › <b>Plano de Ação</b></div>
-      <p style={{ color: 'var(--text-2)', marginBottom: 20 }}>{data.resumo_executivo.titulo}</p>
+      <PageHeader
+        title="Plano de Ação"
+        subtitle={data.resumo_executivo.titulo}
+        breadcrumb={["Demo BI", "Plano de Ação"]}
+      />
       <div className="grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 }}>
         {data.resumo_executivo.destaques.map((d, i) => (
           <div key={i} className="card kpi-mini">
