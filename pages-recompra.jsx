@@ -72,7 +72,20 @@ const _SectionTitle = ({ num, title, desc }) => (
 
 // ===== Heatmap Coortes (SVG custom) =====
 const CoortesHeatmap = ({ rows, height = 320 }) => {
-  if (!rows || !rows.length) return <div className="empty">sem dados de coorte</div>;
+  // Mede container e calcula cellW dinâmico pra preencher 100% horizontal
+  const wrapRef = React.useRef(null);
+  const [contW, setContW] = React.useState(900);
+  React.useLayoutEffect(() => {
+    const el = wrapRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver((entries) => {
+      const w = entries[0].contentRect.width;
+      if (w > 0) setContW(Math.round(w));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  if (!rows || !rows.length) return <div ref={wrapRef} className="empty">sem dados de coorte</div>;
   // group por cohort
   const byCohort = {};
   rows.forEach((r) => {
@@ -81,15 +94,19 @@ const CoortesHeatmap = ({ rows, height = 320 }) => {
   });
   const cohorts = Object.keys(byCohort).sort();
   const offsets = Array.from({ length: 12 }, (_, i) => i);
-  const cellW = 60, cellH = 28, labelW = 70;
-  const W = labelW + cellW * offsets.length + 80;
+  const cellH = 28, labelW = 70, rightW = 80;
+  const minCellW = 36;  // mínimo legível
+  // cellW preenche o container; abaixo do mínimo ativa scroll horizontal interno
+  const cellW = Math.max(minCellW, Math.floor((contW - labelW - rightW) / offsets.length));
+  const W = labelW + cellW * offsets.length + rightW;
   const H = 30 + cellH * cohorts.length + 40;
 
   // domínio (0% a 1.0 mas saturar em 0.6 pra dar contraste — m_offset=0 sempre 100%)
   const vMin = 0, vMax = 0.5;
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height, display: 'block' }}>
+    <div ref={wrapRef} style={{ width: '100%', overflowX: 'auto' }}>
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ display: 'block', minWidth: W }}>
       {/* header */}
       <text x={labelW/2} y={20} textAnchor="middle" style={{ fontSize: 10, fill: 'var(--mute)' }}>Cohort</text>
       {offsets.map((o) => (
@@ -126,6 +143,7 @@ const CoortesHeatmap = ({ rows, height = 320 }) => {
         );
       })}
     </svg>
+    </div>
   );
 };
 
