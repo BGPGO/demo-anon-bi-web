@@ -4021,6 +4021,12 @@ html[data-theme="light"] body {
   /* Card pai com overflow:hidden clipa tabelas largas — em mobile, permite scroll horizontal interno */
   .card { overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; }
   .kpi-tile { overflow: hidden; }  /* mantém glow contido nos KPIs */
+  /* Sticky col com bg fantasma (var(--panel) inexistente) — pinta fundo só no mobile pra evitar sobreposição ao scrollar horizontal */
+  table.t th[style*="position: sticky"][style*="left: 0"],
+  table.t td[style*="position: sticky"][style*="left: 0"] {
+    background: var(--surface) !important;
+    box-shadow: 2px 0 8px -2px rgba(0, 0, 0, 0.45);
+  }
   /* PageHeader empilha title + actions */
   .page-title { flex-direction: column; align-items: stretch; gap: 12px; padding-bottom: 12px; margin-bottom: 10px; }
   .page-title h1 { font-size: 22px; letter-spacing: -0.025em; }

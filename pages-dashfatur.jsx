@@ -43,9 +43,11 @@ const AstroBarVGrouped = ({ groups, series, labels, colors, height = 240, fmt })
   if (max === 0) max = 1;
   const N = groups.length;
   const S = series.length;
-  // barW dinâmico: cada grupo tem contW/N de espaço; subtrai gap 4px e divide pelas S séries com gap 2px
+  // Desktop: largura base original (preserva visual de antes). Mobile: cap dinâmico se o cálculo natural for menor.
+  const barWBase = N <= 6 ? 22 : (N <= 12 ? 16 : 12);
   const slotW = Math.max(20, (contW - 4 * N) / N);
-  const barW = Math.max(3, Math.floor((slotW - (S - 1) * 2) / S));
+  const barWDyn = Math.max(3, Math.floor((slotW - (S - 1) * 2) / S));
+  const barW = Math.min(barWBase, barWDyn);
   const labelH = 26;
   const plotH = height - labelH;
 

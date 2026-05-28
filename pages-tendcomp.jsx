@@ -60,7 +60,7 @@ const _PivotMatrix = ({ titulo, linhas, valorPorLinhaMes, totaisMes, meses, tota
           <thead>
             <tr>
               <th
-                style={{ textAlign: 'left', position: 'sticky', left: 0, background: 'var(--surface)', boxShadow: '2px 0 8px -2px rgba(0,0,0,0.45)', zIndex: 2, minWidth: 160, cursor: 'pointer' }}
+                style={{ textAlign: 'left', position: 'sticky', left: 0, background: 'var(--panel)', zIndex: 2, minWidth: 160, cursor: 'pointer' }}
                 onClick={() => setSortKey('total')}
                 title="Ordenar pelo total"
               >
@@ -98,7 +98,7 @@ const _PivotMatrix = ({ titulo, linhas, valorPorLinhaMes, totaisMes, meses, tota
                   <td
                     style={{
                       textAlign: 'left', position: 'sticky', left: 0,
-                      background: 'var(--surface)', boxShadow: '2px 0 8px -2px rgba(0,0,0,0.45)', zIndex: 1,
+                      background: 'var(--panel)', zIndex: 1,
                       fontWeight: 500, color: 'var(--text)',
                       borderRight: '1px solid var(--border)',
                     }}
@@ -156,7 +156,7 @@ const _PivotMatrix = ({ titulo, linhas, valorPorLinhaMes, totaisMes, meses, tota
               <td
                 style={{
                   textAlign: 'left', position: 'sticky', left: 0,
-                  background: 'var(--surface)', boxShadow: '2px 0 8px -2px rgba(0,0,0,0.45)', zIndex: 1,
+                  background: 'var(--panel)', zIndex: 1,
                   fontWeight: 700, color: 'var(--text)',
                   borderRight: '1px solid var(--border)',
                 }}
